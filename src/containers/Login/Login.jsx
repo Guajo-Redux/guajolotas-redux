@@ -100,19 +100,6 @@ const Login = () => {
                     />
                     <Form.Control type="password" placeholder="Ingrese Contraseña" id='password' style={{ paddingLeft: '35px', paddingRight: '35px' }} />
                 </Form.Group>
-                <Row>
-                    <StyleButtonContainer xs={12}>
-                        <StyledButtonGoogle variant="primary" type='submit'
-                        // onClick={handleGoogleLogin}
-
-                        >
-                            <div style={{ padding: '10px' }}>
-                                <FcGoogle />
-                            </div>
-                                    Continuar con Google
-                                    </StyledButtonGoogle>
-                    </StyleButtonContainer>
-                </Row>
                 <StyledButtom >Entrar
                 </StyledButtom>
                 <Row>
@@ -123,6 +110,19 @@ const Login = () => {
                         {/* <Link to='/auth/registro' >
                             </Link> */}
                     </Col>
+                </Row>
+                <Row>
+                    <StyleButtonContainer xs={12}>
+                        <StyledButtonGoogle variant="primary" type='submit'
+                        // onClick={handleGoogleLogin}
+
+                        >
+                            <div style={{ padding: '10px' }}>
+                                <FcGoogle />
+                            </div>
+                                                Continuar con Google
+                                                </StyledButtonGoogle>
+                    </StyleButtonContainer>
                 </Row>
             </StyledFormMainContainer>
         </StyledFormContainer>
