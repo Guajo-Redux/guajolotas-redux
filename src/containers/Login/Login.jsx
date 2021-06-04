@@ -8,7 +8,7 @@ import { FaLock } from 'react-icons/fa'
 import { Stack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
 import { useForm } from '../../hooks/useForm';
 import { FcGoogle } from 'react-icons/fc';
-// import { login, startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
+import { login, startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
 
 
 // Estilos 
@@ -55,24 +55,24 @@ const StyledFormMainContainer = styled.div`
 const Login = () => {
 
     // Autenticación
-    // const dispatch = useDispatch();
-    // const [formValues, handleInputChange] = useForm({
-    //     email: '',
-    //     password: ''
-    // })
-    // const { email, password } = formValues;
+    const dispatch = useDispatch();
+    const [formValues, handleInputChange] = useForm({
+        email: '',
+        password: ''
+    })
+    const { email, password } = formValues;
 
-    // // Aca hay que cambiar ui por error 
-    // const loading = useSelector(state => state.ui)
+    // Aca hay que cambiar ui por error 
+    const loading = useSelector(state => state.ui)
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch(startLoginEmailPassword(email, password))
-    // }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(startLoginEmailPassword(email, password))
+    }
 
-    // const handleGoogleLogin = () => {
-    //     dispatch(startGoogleLogin())
-    // }
+    const handleGoogleLogin = () => {
+        dispatch(startGoogleLogin())
+    }
 
 
     return (
@@ -114,7 +114,7 @@ const Login = () => {
                 <Row>
                     <StyleButtonContainer xs={12}>
                         <StyledButtonGoogle variant="primary" type='submit'
-                        // onClick={handleGoogleLogin}
+                        onClick={handleGoogleLogin}
 
                         >
                             <div style={{ padding: '10px' }}>
