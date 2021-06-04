@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { Image } from '@chakra-ui/image';
 // import { Link } from "react-router-dom"
 import { Spinner } from 'react-bootstrap';
+import { activeProduct } from '../../actions/productAction';
+import { useDispatch } from 'react-redux';
 // import { useSelector } from 'react-redux';
 
 const StyledBoxProductos = styled(Box)`
@@ -48,6 +50,15 @@ const Carga = styled(Spinner)`
 
 const Productos = ({ productos }) => {
 
+    const dispatch = useDispatch()
+    const handleClickProduct = (product) => {
+        dispatch(
+            activeProduct(product.id, {
+                ...product
+            })
+        );
+    }
+
     if (productos === "") {
         return (
             <div>
@@ -68,7 +79,8 @@ const Productos = ({ productos }) => {
                     {productos.map(producto => {
                         return (
                             // <Link to={`${section}/${producto.id}`}>
-                            <StyledBoxProductos key={`${producto.id}`}>
+                            <StyledBoxProductos key={`${producto.id}`} onClick={() =>
+                                handleClickProduct(producto)}>
                                 <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                     <Box w="100%" h="10" marginTop="-10px">
                                         <StyledImageProducto src={producto.imagen} alt="Guajalota verde" />

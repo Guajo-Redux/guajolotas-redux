@@ -74,7 +74,13 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 products: [...action.payload]
             }
-        
+        case types.productActive:
+            return {
+                ...state,
+                active: {
+                    ...action.payload
+                }
+            }
         default:
             return state
     }

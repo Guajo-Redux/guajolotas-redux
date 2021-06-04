@@ -1,3 +1,4 @@
 export const types = {
-    productsLoad: '[Products] Load products'
+    productsLoad: '[Products] Load products',
+    productActive: '[Products] Active Product'
 }
