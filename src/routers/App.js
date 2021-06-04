@@ -1,8 +1,10 @@
+import Home from '../containers/home/Home';
 
 function App() {
+ 
   return (
     <div className="App">
-        <h1>Prueba</h1>
+      <Home/>
     </div>
   );
 }
