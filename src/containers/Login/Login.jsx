@@ -18,16 +18,17 @@ const StyledFormContainer = styled(Container)`
     align-items: center;
     flex-direction: column;
     height: 100vh; 
+    background: #F2F2F2;
 `
 
 const StyledButtom = styled.button`
     background: #FA4A0C;
     border: none;
-    box-shadow: 0px 10px 10px -6px black;
     border-radius: 40px;
-    padding: 12px 24px;
+    padding: 5px 15px;
     margin-top: 10px;
     color: white;
+    width: 250px;
 `
 const StyleButtonContainer = styled(Col)`
     text-align: center;
@@ -103,25 +104,26 @@ const Login = () => {
                 <StyledButtom >Entrar
                 </StyledButtom>
                 <Row>
-                    <Col xs={12} style={{ marginTop: '30px', }}>
-                        <Button variant='secondary'>
-                            Crear una Nueva Cuenta
-                                </Button>
-                        {/* <Link to='/auth/registro' >
-                            </Link> */}
-                    </Col>
-                </Row>
-                <Row>
                     <StyleButtonContainer xs={12}>
                         <StyledButtonGoogle variant="primary" type='submit'
-                        onClick={handleGoogleLogin}
+                            onClick={handleGoogleLogin}
 
                         >
                             <div style={{ padding: '10px' }}>
                                 <FcGoogle />
                             </div>
                                                 Continuar con Google
-                                                </StyledButtonGoogle>
+                        </StyledButtonGoogle>
+                        <Row>
+                            <Link to='/auth/registro' >
+                                <Col xs={12} style={{ marginTop: '30px', }}>
+                                    <Button variant='secondary'>
+                                        Crear una Nueva Cuenta
+                                </Button>
+
+                                </Col>
+                            </Link>
+                        </Row>
                     </StyleButtonContainer>
                 </Row>
             </StyledFormMainContainer>

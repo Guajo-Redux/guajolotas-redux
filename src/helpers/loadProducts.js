@@ -1,7 +1,4 @@
 import { db } from '../firebase/firebase-config';
-
-
-
 export const loadProducts = async ( uid ) => {
 
     const taskStore = await db.collection(`${uid}/homework/task`).get();

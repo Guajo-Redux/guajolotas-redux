@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Login from '../components/Login/Login';
-import Register from '../components/Login/Register';
+import Login from '../containers/Login/Login.jsx'
+import Registro from '../containers/Registro/Registro.jsx'
 
 export const AuthRouter = () => {
     return (
@@ -14,8 +14,8 @@ export const AuthRouter = () => {
                 />
                 <Route
                     exact
-                    path="/auth/register"
-                    component={Register}
+                    path="/auth/registro"
+                    component={Registro}
                 />
                 <Redirect to="/auth/login" />
             </Switch>

@@ -1,12 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import Login from '../containers/Login/Login.jsx'
-import Registro from '../containers/Registro/Registro.jsx'
-
-
 import firebase from 'firebase';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
+  Route,
   BrowserRouter as Router,
   Switch,
   Redirect
@@ -15,6 +12,9 @@ import Home from '../containers/home/Home';
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { login } from '../actions/auth'
+import Carrito from '../containers/Cart/Carrito.jsx'
+
 
 const App = () => {
 
@@ -28,16 +28,16 @@ const App = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
 
       if (user?.uid) {
-        // dispatch(login(user.uid, user.displayName));
-        // setIsLoggedIn(true);
+        dispatch(login(user.uid, user.displayName));
+        setIsLoggedIn(true);
         // dispatch(startLoadingNotes(user.uid));
         // dispatch(startLoadingTask(user.uid));
 
       } else {
-        // setIsLoggedIn(false);
+        setIsLoggedIn(false);
       }
 
-      // setChecking(false);
+      setChecking(false);
 
     });
 
@@ -54,17 +54,14 @@ const App = () => {
     <ChakraProvider>
       <Router>
         <Switch>
-          <PublicRoute path="/auth" component={AuthRouter}/>
-          <PrivateRoute></PrivateRoute>
-          <Redirect to="/auth/login" />
+          <Route exact path='/' component={Home} />
+          <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
+          <PrivateRoute  path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
+          <Redirect to="/" />
         </Switch>
       </Router>
     </ChakraProvider>
-
-
   )
-
-
 }
 
 export default App;
