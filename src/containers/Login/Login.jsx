@@ -5,7 +5,7 @@ import { Col, Row, Form, Container } from 'react-bootstrap'
 import styled from 'styled-components'
 import { FaUserAlt } from 'react-icons/fa'
 import { FaLock } from 'react-icons/fa'
-import { Stack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { useForm } from '../../hooks/useForm';
 import { FcGoogle } from 'react-icons/fc';
 import { login, startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';

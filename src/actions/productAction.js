@@ -21,3 +21,31 @@ export const activeProduct = (id, product) => ({
         ...product
     }
 });
+
+
+export const startLoadingBebidas = (id) => {
+    return async (dispatch) => {
+
+        const bebidas = await loadProducts(id);
+        dispatch(setProductsBebidas(bebidas));
+    }
+}
+
+export const setProductsBebidas = (bebidas) => ({
+    type: types.productBebidas,
+    payload: bebidas
+});
+
+
+export const startLoadingGuajolotas = (id) => {
+    return async (dispatch) => {
+
+        const guajolotas = await loadProducts(id);
+        dispatch(setProductsGuajolotas(guajolotas));
+    }
+}
+
+export const setProductsGuajolotas = (guajolotas) => ({
+    type: types.productGuajolotas,
+    payload: guajolotas
+});

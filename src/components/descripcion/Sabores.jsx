@@ -2,6 +2,8 @@ import React from 'react';
 import { Col, Row, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
+import { activeProduct } from '../../actions/productAction';
 const Container = styled.div`
        margin: 24px;
 `
@@ -31,10 +33,14 @@ const Carga = styled(Spinner)`
      margin-right:auto;
 `
 
-const Sabores = (props) => {
+const Sabores = () => {
 
+    const { products } = useSelector(state => state.products)
+    const { active } = useSelector(state => state.products)
 
-    if (props.productos === undefined) {
+    const dispatch = useDispatch()
+
+    if (products === undefined) {
         return (
             <div>
                 <Carga animation="border" role="status">
@@ -49,21 +55,26 @@ const Sabores = (props) => {
             <ContainerSabor>
                 <Row>
                     {
-                        props.productos.map(guajolotas => {
+                        products.map(producto => {
                             return (
                                 <Col xs={4} mb={5}>
-                                    <Link to={`${guajolotas.id}`}>
+                                    <Link to={`/descripcion/${producto.id}`}>
                                         <button onClick={() => {
-                                            setTimeout(() => {
-                                                window.location.reload()
-                                            }, 1);
+                                            // setTimeout(() => {
+                                            //     window.location.reload()
+                                            // }, 1);
+                                            dispatch(
+                                                activeProduct(producto.id, {
+                                                    ...producto
+                                                })
+                                            );
                                         }}>
                                             {
-                                                (guajolotas.id === props.especifico.id)
+                                                (producto.id === active.id)
                                                     ?
-                                                    <ImgSabores src={guajolotas.sabor.imagenSabor} alt={guajolotas.sabor.nombreSabor} border="0" />
+                                                    <ImgSabores src={producto.imagenSabor} alt={producto.nombreSabor} border="0" />
                                                     :
-                                                    <ImgSabores style={{ opacity: "0.2" }} src={guajolotas.sabor.imagenSabor} alt={guajolotas.sabor.nombreSabor} border="0" />
+                                                    <ImgSabores style={{ opacity: "0.2" }} src={producto.imagenSabor} alt={producto.nombreSabor} border="0" />
                                             }
                                         </button>
                                     </Link>

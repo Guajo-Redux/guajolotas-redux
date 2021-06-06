@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from 'firebase'
 import styled from 'styled-components'
-// import { Link } from "react-router-dom"
 import { Grid, GridItem } from '@chakra-ui/layout';
 import { Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'

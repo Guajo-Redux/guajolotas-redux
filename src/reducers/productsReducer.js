@@ -63,6 +63,8 @@ const initialState = {
             "imagen": "https://i.ibb.co/HzH8f48/g-guayabax4.png"
         }
     ],
+    bebidas: null,
+    guajolotas: null,
     active: null
 }
 
@@ -80,6 +82,16 @@ const productsReducer = (state = initialState, action) => {
                 active: {
                     ...action.payload
                 }
+            }
+        case types.productBebidas:
+            return {
+                ...state,
+                bebidas: [...action.payload]
+            }
+        case types.productGuajolotas:
+            return {
+                ...state,
+                guajolotas: [...action.payload]
             }
         default:
             return state

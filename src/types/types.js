@@ -4,12 +4,14 @@ export const types = {
     
     uiSetError: 'set Error,',
     uiRemoveError: 'Remove Error',
-    uiStarLoading: 'start loading',
-    uiFinishLoading: 'finish loading',
+    // uiStarLoading: 'start loading',
+    // uiFinishLoading: 'finish loading',
 
     uiStartLoading: 'UI start loading',
     uiFinishLoading: 'UI finish loading',
 
     productsLoad: '[Products] Load products',
-    productActive: '[Products] Active Product'
+    productActive: '[Products] Active Product',
+    productBebidas: '[Products] Guajocombo Bebidas',
+    productGuajolotas: '[Products] Guajocombo Guajolotas'
 }

@@ -36,28 +36,28 @@ const Cantidad = styled.h2`
 
 function CounterDos({ modificarCantidad }) {
 
-        const { state, incremento, decremento } = useCounter(0, modificarCantidad)
+    const { state, incremento, decremento } = useCounter(0, modificarCantidad)
 
-        return (
-                <div>
-                        <Contenedor>
-                                {
-                                        (state === 0)
-                                                ?
-                                                <img src="https://i.ibb.co/bQtPKQw/minus-circle-gray.png" alt="minus-circle-gray" border="0" />
-                                                :
-                                                <BotonesCantidad onClick={() => decremento()}>
-                                                        <img src="https://i.ibb.co/wRnV6YJ/minus-circle.png" alt="minus-circle" border="0" />
-                                                </BotonesCantidad>
-                                }
+    return (
+        <div>
+            <Contenedor>
+                {
+                    (state === 0)
+                        ?
+                        <img src="https://i.ibb.co/bQtPKQw/minus-circle-gray.png" alt="minus-circle-gray" border="0" />
+                        :
+                        <BotonesCantidad onClick={() => decremento()}>
+                            <img src="https://i.ibb.co/wRnV6YJ/minus-circle.png" alt="minus-circle" border="0" />
+                        </BotonesCantidad>
+                }
 
-                                <Cantidad>  {state} </Cantidad>
-                                <BotonesCantidad onClick={() => incremento()}>
-                                        <img src="https://i.ibb.co/gWVpXrD/plus-circle.png" alt="plus-circle" border="0" />
-                                </BotonesCantidad>
-                        </Contenedor>
-                </div>
-        )
+                <Cantidad>  {state} </Cantidad>
+                <BotonesCantidad onClick={() => incremento()}>
+                    <img src="https://i.ibb.co/gWVpXrD/plus-circle.png" alt="plus-circle" border="0" />
+                </BotonesCantidad>
+            </Contenedor>
+        </div>
+    )
 }
 
 export default CounterDos

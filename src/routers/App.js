@@ -14,7 +14,8 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { login } from '../actions/auth'
 import Carrito from '../containers/Cart/Carrito.jsx'
-
+import Descripcion from '../containers/descripcion/Descripcion';
+import { startLoadingBebidas, startLoadingGuajolotas } from '../actions/productAction'
 
 const App = () => {
 
@@ -22,7 +23,8 @@ const App = () => {
 
   const [checking, setChecking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  dispatch(startLoadingBebidas('bebidas'))
+  dispatch(startLoadingGuajolotas('guajolotas'))
   useEffect(() => {
 
     firebase.auth().onAuthStateChanged(async (user) => {
@@ -30,8 +32,6 @@ const App = () => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
-        // dispatch(startLoadingNotes(user.uid));
-        // dispatch(startLoadingTask(user.uid));
 
       } else {
         setIsLoggedIn(false);
@@ -56,7 +56,8 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={Home} />
           <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
-          <PrivateRoute  path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
+          <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
+          <PublicRoute path="/descripcion/:prodId" component={Descripcion} />
           <Redirect to="/" />
         </Switch>
       </Router>
