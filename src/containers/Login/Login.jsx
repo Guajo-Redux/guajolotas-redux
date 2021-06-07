@@ -8,7 +8,8 @@ import { FaLock } from 'react-icons/fa'
 import { Button } from '@chakra-ui/react';
 import { useForm } from '../../hooks/useForm';
 import { FcGoogle } from 'react-icons/fc';
-import { login, startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
+import { RiFacebookFill } from 'react-icons/ri';
+import { login, startLoginEmailPassword, startGoogleLogin, startFacebookLogin } from '../../actions/auth';
 
 
 // Estilos 
@@ -43,6 +44,7 @@ const StyledButtonGoogle = styled(Button)`
     box-shadow: 0px 4px 8px rgb(89 73 30 / 16%) !important;
     font-weight: bold;
     font-size: 15px;
+    margin-bottom:10px;
 `
 
 const StyledFormMainContainer = styled.div`
@@ -75,6 +77,9 @@ const Login = () => {
         dispatch(startGoogleLogin())
     }
 
+    const handleFacebook = () => {
+        dispatch(startFacebookLogin())
+    }
 
     return (
         <StyledFormContainer>
@@ -113,6 +118,15 @@ const Login = () => {
                                 <FcGoogle />
                             </div>
                                                 Continuar con Google
+                        </StyledButtonGoogle>
+                        <StyledButtonGoogle variant="primary" type='submit'
+                            onClick={handleFacebook}
+
+                        >
+                            <div style={{ padding: '10px' }}>
+                                <RiFacebookFill />
+                            </div>
+                                                Continuar con Facebook
                         </StyledButtonGoogle>
                         <Row>
                             <Link to='/auth/registro' >
