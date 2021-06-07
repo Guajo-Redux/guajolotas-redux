@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { useToast } from '@chakra-ui/toast'
 import { Button } from '@chakra-ui/button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddCarrito, startSaveCart } from '../../actions/cartAction'
 
 const NavFixed = styled.div`
   position: fixed;
@@ -33,8 +34,14 @@ const NavButton = styled(Button)`
     color: #F6F6F9 !important;
 `
 
-const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
+const BotonCarrito = ({cant,  comboProducto, precio}) => {
+    
+    const dispatch = useDispatch()
+
+    const {cart} = useSelector(state => state.cart)
+    
     const {active} = useSelector(state => state.products)
+
     const toast = useToast()
 
     const agregarCarrito = async (e) => {
@@ -42,9 +49,33 @@ const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
 
         if (parseInt(cant) === 0) {
             alert("No hay productos registrados")
-        } 
-        // else {
+        } else {
 
+            if (comboProducto === undefined) {
+                const found1 = cart.find(element => element.id === active.id);
+
+                console.log(found1);
+
+                if (found1 !== undefined) {
+                    console.log('Actualizar');
+
+                    // constt actCar = {
+
+                    // }
+                    // dispatch(startSaveCart(found1))
+                    
+                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
+                } else {
+                    console.log('Agregar');
+                    
+                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
+                }
+            } else {
+                
+                dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
+                dispatch(AddCarrito(comboProducto.nombre, comboProducto.precio, comboProducto.imagen, 1, comboProducto.id))
+
+            }
         //     const found1 = dataCart.find(element => element.id === active.id);
 
 //             if (found1 !== undefined) {
@@ -79,8 +110,9 @@ const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
 //                         isClosable: true,
 //                     })
 //                 }
+// --------------------------------------------------------------------------------------------------------------
 //             } else {
-
+// --------------------------------------------------------------------------------------------------------------
 //                 const nuevoProducto =
 //                 {
 //                     nombre: active.nombre,
@@ -183,7 +215,7 @@ const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
 //                     }
 //                 }
 //             }
-//         }
+        }
     }
 
     return (
