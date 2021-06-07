@@ -32,22 +32,19 @@ const StyledColorContainer = styled.div`
     z-index: -1;
 `
 
-let usuario = 'Maurico Cianci'
-let correo = 'chichocianci@gmail.com'
-
 const Perfil = () => {
 
     console.log(authDb);
     
     // const {active} = useSelector(state => state.task)
     const dispatch = useDispatch()
-    const data = useSelector(state => state.auth);
-    console.log(data);
-    console.log(data.name);
-    console.log(data.uid);
+    const {user} = useSelector(state => state.user);
+    const {auth} = useSelector(state => state.auth);
+    console.log(user);
 
-//   const user = useSelector(state => state.user)
-//   console.log(user)
+
+
+
     const handlePictureClick = () => {
         document.querySelector('#fileSelector').click();
     }
@@ -79,10 +76,10 @@ const Perfil = () => {
                 </div>
                 <Button onClick={handlePictureClick}>Cambiar</Button>
                 <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>
-                    {usuario}
+                    {user.name}
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    {correo}
+                    {user.email}
                 </div>
                 <StyledStack spacing={4} >
                     <InputGroup>
@@ -90,7 +87,7 @@ const Perfil = () => {
                             pointerEvents="none"
                             children={<FaUserAlt color="gray.300" />}
                         />
-                        <Input type="tel" value={usuario} />
+                        <Input type="tel" value={user.name} />
                     </InputGroup>
 
                     <InputGroup>
@@ -98,7 +95,7 @@ const Perfil = () => {
                             pointerEvents="none"
                             children={<MdEmail color="gray.300" />}
                         />
-                        <Input value={correo} />
+                        <Input value={user.email} />
                     </InputGroup>
                 </StyledStack>
                 <StyledContainerButton >
