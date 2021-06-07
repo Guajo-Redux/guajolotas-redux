@@ -49,3 +49,33 @@ export const setProductsGuajolotas = (guajolotas) => ({
     type: types.productGuajolotas,
     payload: guajolotas
 });
+
+// Actualizar la foto de perfil::
+export const startSaveNote = ( note ) => {
+    return async( dispatch, getState ) => {
+
+        const { uid } = getState().auth;
+
+        // if ( !note.url ){
+        //     delete note.url;
+        // }
+
+        // const noteToFirestore = { ...note };
+        // delete noteToFirestore.id;
+
+        // await db.doc(`${ uid }/journal/notes/${ note.id }`).update( noteToFirestore );
+
+        // dispatch( refreshNote( note.id, noteToFirestore ) );
+    }
+}
+
+// export const startUploading = (url ) => {
+//     return async( dispatch, getState ) => {
+
+//         const { active:activeNote } = getState().url;
+//         const fileUrl = await fileUpload( url );
+//         activeNote.url = fileUrl;
+
+//         dispatch( startSaveNote( activeNote ) )
+//     }
+// }

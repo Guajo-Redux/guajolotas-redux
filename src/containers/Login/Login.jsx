@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Col, Row, Form, Container } from 'react-bootstrap'
 import styled from 'styled-components'
 import { FaUserAlt } from 'react-icons/fa'
@@ -54,6 +54,9 @@ const StyledFormMainContainer = styled.div`
     flex-direction: column;
 
 `
+const StyledImgArrow = styled.img`
+    margin-right: 280px;
+`
 
 const Login = () => {
 
@@ -83,7 +86,11 @@ const Login = () => {
 
     return (
         <StyledFormContainer>
-            <img src='https://i.ibb.co/xLYZydk/logo.png' style={{ marginBottom: '10px' }} alt="Imagen del logo" />
+            {/* <Link to = "/home">
+                <StyledImgArrow src="https://i.ibb.co/ZGqLjJJ/vector-chevron-left.png" />
+                <p>Volver</p>
+            </Link> */}
+            <img src='https://i.ibb.co/xLYZydk/logo.png' style={{ marginBottom: '10px', marginTop: '20px' }} alt="Imagen del logo" />
             <Row>
                 <Col xs={12}>
                     <h1 style={{ fontSize: '23px', fontWeight: 'bold' }} className='mt-2 mb-4'>Iniciar Sesión</h1>
