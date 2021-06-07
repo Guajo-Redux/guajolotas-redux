@@ -13,5 +13,8 @@ export const types = {
     productsLoad: '[Products] Load products',
     productActive: '[Products] Active Product',
     productBebidas: '[Products] Guajocombo Bebidas',
-    productGuajolotas: '[Products] Guajocombo Guajolotas'
+    productGuajolotas: '[Products] Guajocombo Guajolotas',
+
+    addUser: 'Agregar Usuario',
+    updateUser: 'Actualizar Usuario'
 }

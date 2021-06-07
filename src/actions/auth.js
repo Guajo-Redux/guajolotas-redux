@@ -1,6 +1,7 @@
 import {types} from '../types/types'
-import {googleAuthProvider, firebase} from '../firebase/firebase-config'
+import {googleAuthProvider, firebase, db} from '../firebase/firebase-config'
 import {starLoading, finishLoading} from './uiError'
+
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => { 
@@ -21,17 +22,28 @@ export const startGoogleLogin = () => {
         firebase.auth().signInWithPopup(googleAuthProvider)
         .then(({user}) => {
             dispatch(
-                login(user.uid, user.displayName)
+                login(user.uid, user.displayName),
             )
-            console.log(user);
         })
     }
 }
 
-export const startRegisterWithEmailPasswordName = (email, password, name) => {
+export const startRegisterWithEmailPasswordName = (email, password, name, address) => {
     return (dispatch) => { 
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(async({user}) => {
+
+            const newUser = {
+                name,
+                password,
+                email,
+                image: 'https://bit.ly/dan-abramov',
+                address,
+            }
+            console.log(newUser);
+            await db.collection(`profile/user/${user.uid}`).add(newUser)
+
+            dispatch(newProfile(user.uid, newUser))
 
             await user.updateProfile({displayName: name})
             dispatch(
@@ -54,6 +66,7 @@ export const login = (uid, displayName) => {
         }
     }
 }
+
 export const starLogout = () => {
     return async (dispatch) => {
         await firebase.auth().signOut();
@@ -65,3 +78,28 @@ export const logout = () => ({
     type: types.logout
 })
 
+export const userData = (usuario, email) => {
+    return{
+        type: userData,
+        payload: {
+            usuario,
+            email
+        }
+    }
+}
+
+export const newProfile = (uid, user) => {
+    return {
+        type: types.addUser,
+        payload: {
+            uid,
+            ...user
+        }
+    }
+}
+
+export const updateProfile = () => {
+    return {
+
+    }
+}
