@@ -66,12 +66,12 @@ const initialState = {
     bebidas: null,
     guajolotas: null,
     active: {
-        id: '',
-        nombre: '', 
-        precio: '',
-        nombreSabor: '',
-        imagenSabor: '',
-        imagen: ''
+        id: "guajo-0",
+        nombre: "Guajolota de Tamal Verde",
+        precio: 25,
+        nombreSabor: "Verde",
+        imagenSabor: "https://i.ibb.co/crTNfY4/s-verde.png",
+        imagen: "https://i.ibb.co/0y5fZTK/g-verdex4.png"
     }
 }
 

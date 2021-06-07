@@ -188,9 +188,9 @@ const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
 
     return (
         <div>
-            {/* <NavFixed>
+            <NavFixed>
                 <NavButton onClick={agregarCarrito}>Agregar {cant} al carrito ${cant * active.precio + precio}.00</NavButton>
-            </NavFixed> */}
+            </NavFixed>
         </div>
     )
 }
