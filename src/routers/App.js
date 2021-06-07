@@ -20,6 +20,7 @@ import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components'
 import { startLoadingCart } from '../actions/cartAction';
 import Perfil from '../containers/Profile/Perfil.jsx'
+import { startLoadingUser } from '../actions/userAction';
 
 const Carga = styled(Spinner)`
      display:block;
@@ -48,6 +49,7 @@ const App = () => {
         setIsLoggedIn(true);
         
         dispatch(startLoadingCart(user.uid))
+        dispatch(startLoadingUser(user.uid))
       } else {
         setIsLoggedIn(false);
       }

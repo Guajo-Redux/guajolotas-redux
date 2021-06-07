@@ -46,7 +46,8 @@ const Perfil = () => {
     console.log(data.name);
     console.log(data.uid);
 
-   
+//   const user = useSelector(state => state.user)
+//   console.log(user)
     const handlePictureClick = () => {
         document.querySelector('#fileSelector').click();
     }

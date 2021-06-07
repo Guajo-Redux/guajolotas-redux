@@ -21,5 +21,6 @@ export const types = {
     cartActive: 'Active Cart',
     cartDelete: 'Delete Cart',
     addUser: 'Agregar Usuario',
-    updateUser: 'Actualizar Usuario'
+    updateUser: 'Actualizar Usuario',
+    loadUser: 'Load user'
 }

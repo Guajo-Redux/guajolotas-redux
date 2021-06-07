@@ -1,6 +1,7 @@
 import {types} from '../types/types'
-import {googleAuthProvider, firebase, facebookAuthProvider} from '../firebase/firebase-config'
+import {googleAuthProvider, firebase, facebookAuthProvider, db} from '../firebase/firebase-config'
 import {starLoading, finishLoading} from './uiError'
+
 
 
 export const startLoginEmailPassword = (email, password) => {
@@ -47,17 +48,15 @@ export const startRegisterWithEmailPasswordName = (email, password, name, addres
         .then(async({user}) => {
 
             const newUser = {
+                uid: user.uid,
                 name,
-                password,
                 email,
                 image: 'https://bit.ly/dan-abramov',
                 address,
             }
-            console.log(newUser);
             await db.collection(`profile/user/${user.uid}`).add(newUser)
 
             dispatch(newProfile(user.uid, newUser))
-
             await user.updateProfile({displayName: name})
             dispatch(
                 login(user.uid, user.displayName)

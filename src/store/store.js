@@ -4,12 +4,14 @@ import {registro} from '../reducers/uiReducer'
 import thunk from 'redux-thunk'
 import productsReducer from '../reducers/productsReducer';
 import cartReducer from '../reducers/cartReducer';
+import {userReducer} from '../reducers/userReducer'
 
 const reducers = combineReducers({
     auth: authReducer,
     products: productsReducer,
     error: registro,
-    cart: cartReducer
+    cart: cartReducer,
+    user: userReducer
 })
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

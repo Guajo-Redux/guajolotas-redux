@@ -7,7 +7,7 @@ const inicialState = {
         email: '',
         image: 'https://bit.ly/dan-abramov',
         address: ''
-    }
+        }
 }
 
 // Se implementa el reducer para autenticar el usuario 

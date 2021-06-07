@@ -29,3 +29,18 @@ export const loadCart = async (id) => {
 
     return cart;
 }
+
+export const loadUserP = async (id) => {
+
+    const userSnap = await db.collection(`profile/user/${id}`).get();
+    const user = [];
+
+    userSnap.forEach(snapHijo => {
+        user.push({
+            id: snapHijo.id,
+            ...snapHijo.data()
+        })
+    });
+
+    return user;
+}
