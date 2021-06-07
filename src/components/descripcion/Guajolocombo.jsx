@@ -111,6 +111,12 @@ const Guajolocombo = ({ modificarCantidad, traerArreglo }) => {
         setIsChecked(!isChecked)
     }
 
+    if (bebidas === null || guajolotas === null) {
+        return (
+          <h1>Wait...</h1>
+        )
+    }
+
     return (
         <ContenedorGuajo>
             {

@@ -65,7 +65,14 @@ const initialState = {
     ],
     bebidas: null,
     guajolotas: null,
-    active: null
+    active: {
+        id: '',
+        nombre: '', 
+        precio: '',
+        nombreSabor: '',
+        imagenSabor: '',
+        imagen: ''
+    }
 }
 
 
