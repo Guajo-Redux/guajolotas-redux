@@ -7,6 +7,7 @@ import { MdEmail } from 'react-icons/md'
 import { IoChevronBackOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
+import { authDb } from '../../firebase/firebase-config';
 
 const StyledPerfilContainer = styled.div`
     height: 100vh;
@@ -36,8 +37,15 @@ let correo = 'chichocianci@gmail.com'
 
 const Perfil = () => {
 
+    console.log(authDb);
+    
     // const {active} = useSelector(state => state.task)
     const dispatch = useDispatch()
+    const data = useSelector(state => state.auth);
+    console.log(data);
+    console.log(data.name);
+    console.log(data.uid);
+
    
     const handlePictureClick = () => {
         document.querySelector('#fileSelector').click();

@@ -50,7 +50,7 @@ const Registro = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValid()) {
-            dispatch(startRegisterWithEmailPasswordName(email, password, name))
+            dispatch(startRegisterWithEmailPasswordName(email, password, name, direction))
         }
     }
 
