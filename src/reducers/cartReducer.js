@@ -2,7 +2,7 @@ import { types } from "../types/types"
 
 const initialState = {
     cart: [],
-    active: null
+    active: {}
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -32,6 +32,12 @@ const cartReducer = (state = initialState, action) => {
                 active: {
                     ...action.payload
                 }
+            }
+        case types.cartDelete:
+            return {
+                ...state,
+                active: null,
+                cart: state.cart.filter(crt => crt.id !== action.payload)
             }
         default:
             return state;

@@ -45,7 +45,7 @@ const App = () => {
         dispatch(login(user.uid, user.displayName));
 
         setIsLoggedIn(true);
-
+        
         dispatch(startLoadingCart(user.uid))
       } else {
         setIsLoggedIn(false);

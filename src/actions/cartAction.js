@@ -2,7 +2,7 @@ import { db } from "../firebase/firebase-config"
 import { types } from "../types/types"
 import { loadCart } from '../helpers/loadHelp'
 
-export const AddCarrito = (nombre, precio, imagen, cantidad, id) => {
+export const AddCarrito = (nombre, precio, imagen, cantidad) => {
     return async (dispatch, getState) => {
         const { uid } = getState().auth
 
@@ -10,12 +10,12 @@ export const AddCarrito = (nombre, precio, imagen, cantidad, id) => {
             nombre,
             precio,
             imagen,
-            cantidad,
-            id
+            cantidad
         }
 
         await db.collection(`${uid}/cart/productos`).add(newProduct)
         dispatch(addNewProduct(uid, newProduct))
+        dispatch(startLoadingCart(uid))
     }
 }
 
@@ -51,6 +51,7 @@ export const startSaveCart = ( cart ) => {
         await db.doc(`${uid}/cart/productos/${cart.id}`).update( cartToFirestore );
 
         dispatch( refreshCart( cart.id, cartToFirestore ) );
+        dispatch(startLoadingCart(uid))
     }
 }
 
@@ -71,4 +72,20 @@ export const activeCart = (id, cart) => ({
         id,
         ...cart
     }
+});
+
+export const startDeletingCart = ( id ) => {
+    return async( dispatch, getState ) => {
+         
+        const uid = getState().auth.uid;
+
+        await db.doc(`${uid}/cart/productos/${ id }`).delete();
+
+        dispatch( deleteCart(id) );
+    }
+}
+
+export const deleteCart = (id) => ({
+    type: types.cartDelete,
+    payload: id
 });

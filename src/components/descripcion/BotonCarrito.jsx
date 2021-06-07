@@ -34,13 +34,13 @@ const NavButton = styled(Button)`
     color: #F6F6F9 !important;
 `
 
-const BotonCarrito = ({cant,  comboProducto, precio}) => {
-    
+const BotonCarrito = ({ cant, comboProducto, precio }) => {
+
     const dispatch = useDispatch()
 
-    const {cart} = useSelector(state => state.cart)
-    
-    const {active} = useSelector(state => state.products)
+    const { cart } = useSelector(state => state.cart)
+
+    const { active } = useSelector(state => state.products)
 
     const toast = useToast()
 
@@ -50,171 +50,65 @@ const BotonCarrito = ({cant,  comboProducto, precio}) => {
         if (parseInt(cant) === 0) {
             alert("No hay productos registrados")
         } else {
-
             if (comboProducto === undefined) {
-                const found1 = cart.find(element => element.id === active.id);
-
-                console.log(found1);
+                const found1 = cart.find(element => element.nombre === active.nombre);
 
                 if (found1 !== undefined) {
                     console.log('Actualizar');
 
-                    // constt actCar = {
+                    const actCar = {
+                        id: found1.id,
+                        nombre: found1.nombre,
+                        precio: found1.precio,
+                        imagen: found1.imagen,
+                        cantidad: found1.cantidad + cant
+                    }
 
-                    // }
-                    // dispatch(startSaveCart(found1))
-                    
-                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
+                    dispatch(startSaveCart(actCar))
                 } else {
                     console.log('Agregar');
-                    
-                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
+
+                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant))
                 }
             } else {
-                
-                dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant, active.id))
-                dispatch(AddCarrito(comboProducto.nombre, comboProducto.precio, comboProducto.imagen, 1, comboProducto.id))
+                const found1 = cart.find(element => element.nombre === active.nombre);
 
+                if (found1 !== undefined) {
+                    console.log('Actualizar');
+
+                    const actCar = {
+                        id: found1.id,
+                        nombre: found1.nombre,
+                        precio: found1.precio,
+                        imagen: found1.imagen,
+                        cantidad: found1.cantidad + cant
+                    }
+
+                    dispatch(startSaveCart(actCar))
+                } else {
+                    console.log('Agregar');
+
+                    dispatch(AddCarrito(active.nombre, active.precio, active.imagen, cant))
+                }
+
+                const found2 = cart.find(element => element.nombre === comboProducto.nombre);
+
+                if (found2 !== undefined) {
+                    console.log('Actualizar');
+
+                    const actCar = {
+                        id: found2.id,
+                        nombre: found2.nombre,
+                        precio: found2.precio,
+                        imagen: found2.imagen,
+                        cantidad: found2.cantidad + 1
+                    }
+
+                    dispatch(startSaveCart(actCar))
+                } else {
+                    dispatch(AddCarrito(comboProducto.nombre, comboProducto.precio, comboProducto.imagen, 1))
+                }
             }
-        //     const found1 = dataCart.find(element => element.id === active.id);
-
-//             if (found1 !== undefined) {
-
-//                 const actualizarCantidad = {
-//                     nombre: active.nombre,
-//                     precio: active.precio,
-//                     imagen: active.imagen,
-//                     cantidad: found1.cantidad + props.cant
-//                 }
-
-//                 const url = `https://api-guajolotas.herokuapp.com/cart/${found1.id}`
-
-//                 try {
-//                     const resultado = await axios.put(url, actualizarCantidad)
-
-//                     if (resultado.status === 200) {
-//                         toast({
-//                             title: "Actualizado",
-//                             description: "Su producto se actualizo correctamente",
-//                             status: "success",
-//                             duration: 9000,
-//                             isClosable: true,
-//                         })
-//                     }
-//                 } catch {
-//                     toast({
-//                         title: "Problemas",
-//                         description: "No se pudo actualizar su producto",
-//                         status: "warning",
-//                         duration: 9000,
-//                         isClosable: true,
-//                     })
-//                 }
-// --------------------------------------------------------------------------------------------------------------
-//             } else {
-// --------------------------------------------------------------------------------------------------------------
-//                 const nuevoProducto =
-//                 {
-//                     nombre: active.nombre,
-//                     precio: active.precio,
-//                     imagen: active.imagen,
-//                     cantidad: cant,
-//                     id: active.id
-//                 }
-
-//                 const url = "https://api-guajolotas.herokuapp.com/cart"
-
-//                 try {
-//                     const resultado = await axios.post(url, nuevoProducto)
-//                     if (resultado.status === 200) {
-//                         toast({
-//                             title: "Agregado",
-//                             description: "Su producto se agregó correctamente",
-//                             status: "success",
-//                             duration: 9000,
-//                             isClosable: true,
-//                         })
-//                     }
-//                 } catch {
-//                     toast({
-//                         title: "Problemas",
-//                         description: "No se pudo agregar su producto",
-//                         status: "warning",
-//                         duration: 9000,
-//                         isClosable: true,
-//                     })
-//                 }
-//             }
-
-//             const found2 = dataCart.find(element => element.id === comboProducto.id);
-//             if (found2 !== undefined) {
-//                 if (found2 !== undefined) {
-
-//                     const actualizarCantidad = {
-//                         nombre: comboProducto.nombre,
-//                         precio: comboProducto.precio,
-//                         imagen: comboProducto.imagen,
-//                         cantidad: found1.cantidad + cant
-//                     }
-
-//                     const url = `https://api-guajolotas.herokuapp.com/cart/${found1.id}`
-
-//                     try {
-//                         const resultado = await axios.put(url, actualizarCantidad)
-
-//                         if (resultado.status === 200) {
-//                             toast({
-//                                 title: "Actualizado",
-//                                 description: "Su producto se actualizo correctamente",
-//                                 status: "success",
-//                                 duration: 9000,
-//                                 isClosable: true,
-//                             })
-//                         }
-//                     } catch {
-//                         toast({
-//                             title: "Problemas",
-//                             description: "No se pudo actualizar su producto",
-//                             status: "warning",
-//                             duration: 9000,
-//                             isClosable: true,
-//                         })
-//                     }
-//                 } else {
-
-//                     const comboPro =
-//                     {
-//                         nombre: comboProducto.nombre,
-//                         precio: comboProducto.precio,
-//                         imagen: comboProducto.imagen,
-//                         cantidad: 1,
-//                         id: comboProducto.id
-//                     }
-
-//                     const url = "https://api-guajolotas.herokuapp.com/cart"
-
-//                     try {
-//                         const resultado2 = await axios.post(url, comboPro)
-//                         if (resultado2.status === 200) {
-//                             toast({
-//                                 title: "Agregado",
-//                                 description: "Su producto se agregó correctamente",
-//                                 status: "success",
-//                                 duration: 9000,
-//                                 isClosable: true,
-//                             })
-//                         }
-//                     } catch {
-//                         toast({
-//                             title: "Problemas",
-//                             description: "No se pudo agregar su producto",
-//                             status: "warning",
-//                             duration: 9000,
-//                             isClosable: true,
-//                         })
-//                     }
-//                 }
-//             }
         }
     }
 

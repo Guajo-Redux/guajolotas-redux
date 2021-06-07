@@ -6,7 +6,7 @@ import {
     Text
 } from "@chakra-ui/react"
 import {
-    Modal
+    Modal, Spinner
 } from 'react-bootstrap'
 import styled from 'styled-components'
 import ModalCarrito from './ModalCarrito'
@@ -80,18 +80,24 @@ const ModalCCart = styled(Modal)`
     align-items: center;
 `
 
+const Carga = styled(Spinner)`
+     display:block;
+     margin-left:auto;
+     margin-right:auto;
+`
+
 let i = {}
 
-const CategorieCarrito = () => {
-
+const CategorieCarrito = () => {    
+    
     let acum = 0
     let precio
     let cantidad
-
+    
     const [show, setShow] = useState(false);
-
+    
     const dispatch = useDispatch()
-
+    
     const { cart } = useSelector(state => state.cart)
 
     const handleClickCart = (cart) => {
@@ -105,21 +111,21 @@ const CategorieCarrito = () => {
 
     const handleClose = () => setShow(false);
 
-    cart.forEach(cart => {
-        precio = cart.precio
-        cantidad = cart.cantidad
+    cart.forEach(crt => {
+        precio = crt.precio
+        cantidad = crt.cantidad
         acum += (precio * cantidad)
-
     })
+
     return (
-        <DivCart style={{marginBottom: '35%'}}>
+        <DivCart style={{ marginBottom: '35%' }}>
             {
                 cart.map(crt => {
                     return (
                         <DivCCart key={`"cart"-${crt.nombre}`}>
                             <ButtonCCart onClick={() =>
-                                    handleClickCart(crt)
-                                }
+                                handleClickCart(crt)
+                            }
                             >
                                 <Flex>
                                     <Image boxSize="56px" src={crt.imagen} alt={crt.nombre} />

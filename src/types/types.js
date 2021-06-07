@@ -18,5 +18,6 @@ export const types = {
     cartAD: 'Add Cart',
     cartLoad: 'Load Cart',
     cartUpdate: 'Update Cart',
-    cartActive: 'Active Cart'
+    cartActive: 'Active Cart',
+    cartDelete: 'Delete Cart'
 }

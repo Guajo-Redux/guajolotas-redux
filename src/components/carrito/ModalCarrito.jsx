@@ -7,9 +7,10 @@ import {
     Text,
     useToast
 } from "@chakra-ui/react"
-import {useCounter} from '../../hooks/useCounter'
+import useCounter from '../../hooks/useCounter.jsx'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { startDeletingCart, startSaveCart } from '../../actions/cartAction.js'
 
 const HeaderModal = styled(Modal.Header)`
     flex-direction: column;
@@ -67,8 +68,10 @@ const ButtonModal4 = styled.button`
 
 const ModalCarrito = ({ handleClose }) => {
 
+    const dispatch = useDispatch()
+
     const { active: cart } = useSelector(state => state.cart)
-    
+
     const { state, incremento, decremento } = useCounter(cart.cantidad)
 
     const cantidadRef = useRef('')
@@ -77,77 +80,32 @@ const ModalCarrito = ({ handleClose }) => {
 
     const editarCantidad = async (e) => {
 
-        // console.log(e);
+        const nuevaCantidad = cantidadRef.current.textContent
 
-        // const nuevaCantidad = cantidadRef.current.textContent
+        if (parseInt(nuevaCantidad) === 0) {
 
-        // if (parseInt(nuevaCantidad) === 0) {
+            dispatch(startDeletingCart(cart.id))
 
-        //     const url = `http://localhost:3004/cart/${cart.id}`
+            handleClose()
 
-        //     try {
+        } else {
 
-        //         const resultado = await axios.delete(url)
-        //         console.log(cart);
-        //         if (resultado.status === 200) {
-        //             toast({
-        //                 title: "Eliminado",
-        //                 description: "Su producto se elimino correctamente",
-        //                 status: "success",
-        //                 duration: 9000,
-        //                 isClosable: true,
-        //             })
+            const actCar = {
+                id: cart.id,
+                nombre: cart.nombre,
+                precio: cart.precio,
+                imagen: cart.imagen,
+                cantidad: parseInt(nuevaCantidad)
+            }
 
-        //             setTimeout(() => {
-        //                 window.location.reload()
-        //             }, 1000);
-        //         }
+            console.log(actCar);
 
-        //     } catch {
-        //         toast({
-        //             title: "Problemas",
-        //             description: "No se pudo eliminar su producto",
-        //             status: "success",
-        //             duration: 9000,
-        //             isClosable: true,
-        //         })
-        //     }
-        // } else {
-        //     const actualizarCantidad = {
-        //         nombre: cart.nombre,
-        //         precio: cart.precio,
-        //         imagen: cart.imagen,
-        //         cantidad: parseInt(nuevaCantidad)
-        //     }
+            dispatch(startSaveCart(actCar))
 
-        //     const url = `http://localhost:3004/cart/${cart.id}`
-
-        //     try {
-        //         const resultado = await axios.put(url, actualizarCantidad)
-
-        //         if (resultado.status === 200) {
-        //             toast({
-        //                 title: "Actualizado",
-        //                 description: "Su producto se actualizo correctamente",
-        //                 status: "success",
-        //                 duration: 9000,
-        //                 isClosable: true,
-        //             })
-        //         }
-
-        //         setTimeout(() => {
-        //             window.location.reload()
-        //         }, 1000);
-        //     } catch {
-        //         toast({
-        //             title: "Problemas",
-        //             description: "No se pudo actualizar su producto",
-        //             status: "warning",
-        //             duration: 9000,
-        //             isClosable: true,
-        //         })
-        //     }
-        // }
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
+        }
     }
 
     return (
