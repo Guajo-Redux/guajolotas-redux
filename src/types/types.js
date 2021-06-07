@@ -2,7 +2,7 @@ export const types = {
     login: 'Login',
     logout: 'Logout',
     
-    uiSetError: 'set Error,',
+    uiSetError: 'Set Error,',
     uiRemoveError: 'Remove Error',
     // uiStarLoading: 'start loading',
     // uiFinishLoading: 'finish loading',
@@ -13,5 +13,7 @@ export const types = {
     productsLoad: '[Products] Load products',
     productActive: '[Products] Active Product',
     productBebidas: '[Products] Guajocombo Bebidas',
-    productGuajolotas: '[Products] Guajocombo Guajolotas'
+    productGuajolotas: '[Products] Guajocombo Guajolotas',
+
+    cartAD: 'Add Cart'
 }

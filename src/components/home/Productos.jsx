@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, Heading, Stack, StackDivider, Text, VStack } from '@chakra-ui/layout';
 import styled from 'styled-components'
 import { Image } from '@chakra-ui/image';
@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import { Spinner } from 'react-bootstrap';
 import { activeProduct } from '../../actions/productAction';
 import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
 
 const StyledBoxProductos = styled(Box)`
     border-radius: 20px;
@@ -49,6 +48,7 @@ const Carga = styled(Spinner)`
 `
 
 const Productos = ({ productos }) => {
+    const [checking, setChecking] = useState(true);
 
     const dispatch = useDispatch()
     const handleClickProduct = (product) => {
@@ -57,10 +57,14 @@ const Productos = ({ productos }) => {
                 ...product
             })
         );
-        
+
     }
 
-    if (productos === "") {
+    useEffect(() => {
+        setChecking(false);
+    }, [setChecking])
+
+    if (checking || productos === "") {
         return (
             <div>
                 <Carga animation="border" role="status">
@@ -79,8 +83,9 @@ const Productos = ({ productos }) => {
                 <Stack>
                     {productos.map(producto => {
                         return (
-                            <Link to={`/descripcion/${producto.id}`}>
-                                <StyledBoxProductos key={`${producto.id}`} onClick={() =>
+                            <Link to={`/descripcion/${producto.id}`}
+                                key={`home-${producto.id}`}>
+                                <StyledBoxProductos onClick={() =>
                                     handleClickProduct(producto)}>
                                     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                         <Box w="100%" h="10" marginTop="-10px">

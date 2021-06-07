@@ -36,14 +36,16 @@ const NavButton = styled(Button)`
 const BotonCarrito = ({cant, dataCart, comboProducto, precio}) => {
     const {active} = useSelector(state => state.products)
     const toast = useToast()
+
     const agregarCarrito = async (e) => {
-//         e.preventDefault()
+        e.preventDefault()
 
-//         if (parseInt(cant) === 0) {
-//             alert("No hay productos registrados")
-//         } else {
+        if (parseInt(cant) === 0) {
+            alert("No hay productos registrados")
+        } 
+        // else {
 
-//             const found1 = dataCart.find(element => element.id === active.id);
+        //     const found1 = dataCart.find(element => element.id === active.id);
 
 //             if (found1 !== undefined) {
 

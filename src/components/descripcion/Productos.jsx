@@ -44,7 +44,7 @@ const Productos = () => {
         {
           products.map(producto => {
             return (
-              <Carousel.Item key={producto.nombreSabor} className={producto.id} id={producto.id}>
+              <Carousel.Item key={`carousel-${producto.id}`} className={producto.id} >
                 <ImagenCarousel src={producto.imagen} alt={producto.nombre} border="0" />
                 <Descripcion>{producto.nombre}</Descripcion>
                 <Precio>${producto.precio} MXN</Precio>

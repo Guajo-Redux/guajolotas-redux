@@ -97,7 +97,7 @@ const StyledRadioGroup = styled(RadioGroup)`
     justify-content: center;
 `
 
-const Guajolocombo = ({ modificarCantidad, traerArreglo }) => {
+const Guajolocombo = ({ traerArreglo, modificarPrecio }) => {
 
     const { active } = useSelector(state => state.products)
 
@@ -128,6 +128,7 @@ const Guajolocombo = ({ modificarCantidad, traerArreglo }) => {
                                     <CajaGuajo
                                         templateRows="repeat(2)"
                                         templateColumns="repeat(5)"
+                                        key={`comboProduct-${p.id}`}
                                     >
                                         <GridImg colSpan={2} >
                                             <ImagenGuajo src={p.imagen} alt={p.nombre} border="0" />
@@ -136,8 +137,8 @@ const Guajolocombo = ({ modificarCantidad, traerArreglo }) => {
                                         <GridCheck colSpan={2}>
                                             <button onClick={() => {
                                                 setComboCheck(p)
-                                                modificarCantidad("precio", p.precio)
-                                                traerArreglo("comboProducto", p)
+                                                modificarPrecio(p.precio)
+                                                traerArreglo(p)
                                             }}>
                                                 <CheckGuajo value={p.id} colorScheme="orange" name="guajolocombo" id={p.id} defaultChecked={isChecked} onChange={toggleChange}>
                                                 </CheckGuajo>
@@ -166,15 +167,17 @@ const Guajolocombo = ({ modificarCantidad, traerArreglo }) => {
                                 return (
                                     <CajaGuajo
                                         templateRows="repeat(2)"
-                                        templateColumns="repeat(5)">
+                                        templateColumns="repeat(5)"
+                                        key={`comboProduct-${p.id}`}
+                                        >
                                         <GridImg colSpan={2}>
                                             <ImagenGuajo src={p.imagen} alt={p.nombre} border="0" />
                                         </GridImg>
                                         <GridCheck colSpan={2}>
                                             <button onClick={() => {
                                                 setComboCheck(p)
-                                                modificarCantidad("precio", p.precio)
-                                                traerArreglo("comboProducto", p)
+                                                modificarPrecio(p.precio)
+                                                traerArreglo(p)
                                             }}>
                                                 <CheckGuajo value={p.id} colorScheme="orange" name="guajolocombo" id={p.id} >
                                                 </CheckGuajo>

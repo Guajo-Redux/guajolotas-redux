@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import firebase from 'firebase';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Route,
   BrowserRouter as Router,
@@ -16,6 +16,14 @@ import { login } from '../actions/auth'
 import Carrito from '../containers/Cart/Carrito.jsx'
 import Descripcion from '../containers/descripcion/Descripcion';
 import { startLoadingBebidas, startLoadingGuajolotas } from '../actions/productAction'
+import { Spinner } from 'react-bootstrap';
+import styled from 'styled-components'
+
+const Carga = styled(Spinner)`
+     display:block;
+     margin-left:auto;
+     margin-right:auto;
+`
 
 const App = () => {
 
@@ -23,19 +31,23 @@ const App = () => {
 
   const [checking, setChecking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  dispatch(startLoadingBebidas('bebidas'))
-  dispatch(startLoadingGuajolotas('guajolotas'))
+
+  const { bebidas, guajolotas } = useSelector(state => state.products)
+
   useEffect(() => {
 
     firebase.auth().onAuthStateChanged(async (user) => {
-
+      dispatch(startLoadingBebidas('bebidas'))
+      dispatch(startLoadingGuajolotas('guajolotas'))
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
+
         setIsLoggedIn(true);
 
       } else {
         setIsLoggedIn(false);
       }
+
 
       setChecking(false);
 
@@ -44,9 +56,13 @@ const App = () => {
   }, [dispatch, setChecking, setIsLoggedIn])
 
 
-  if (checking) {
+  if (checking || bebidas === null || guajolotas === null) {
     return (
-      <h1>Wait...</h1>
+      <div>
+        <Carga animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Carga>
+      </div>
     )
   }
 
@@ -57,7 +73,7 @@ const App = () => {
           <Route exact path='/' component={Home} />
           <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
-          <PublicRoute path="/descripcion/:prodId" component={Descripcion} />
+          <Route path="/descripcion/:prodId" component={Descripcion} />
           <Redirect to="/" />
         </Switch>
       </Router>

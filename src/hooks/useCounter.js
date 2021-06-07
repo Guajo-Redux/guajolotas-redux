@@ -6,7 +6,7 @@ export const useCounter = (inicial = 0, modificarCantidad) => {
 
     const incremento = () => {
         setstate(state + 1)
-        modificarCantidad("cantidad", state + 1)
+        modificarCantidad(state + 1)
     }
 
     const decremento = () => {
@@ -15,7 +15,7 @@ export const useCounter = (inicial = 0, modificarCantidad) => {
         } else {
             setstate(state - 1)
         }
-        modificarCantidad("cantidad", state - 1)
+        modificarCantidad(state - 1)
     }
 
     return {

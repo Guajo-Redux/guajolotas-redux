@@ -57,8 +57,9 @@ const Sabores = () => {
                     {
                         products.map(producto => {
                             return (
-                                <Col xs={4} mb={5}>
-                                    <Link to={`/descripcion/${producto.id}`}>
+                                <Col xs={4} mb={5} key={`sabores-${producto.id}`}>
+                                    <Link to={`/descripcion/${producto.id}`}
+                                    >
                                         <button onClick={() => {
                                             // setTimeout(() => {
                                             //     window.location.reload()

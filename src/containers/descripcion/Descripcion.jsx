@@ -21,12 +21,16 @@ const Descripcion = () => {
     const [comboProducto, setComboProducto] = useState([])
     const [dataCart, setDataCart] = useState([])
 
-    const modificarCantidad = (campo, valor) => {
-        setCantidad({ [campo]: parseFloat(valor) })
+    const modificarCantidad = (valor) => {
+        setCantidad(parseFloat(valor))
     }
 
-    const traerArreglo = (campo, valor) => {
-        setComboProducto({ [campo]: valor })
+    const modificarPrecio = (valor) => {
+        setPrecio(parseFloat(valor))
+    }
+
+    const traerArreglo = (valor) => {
+        setComboProducto(valor)
     }
 
 
@@ -37,7 +41,7 @@ const Descripcion = () => {
                 <Productos />
                 <Cantidad modificarCantidad={modificarCantidad} />
                 <Sabores />
-                <Guajolocombo modificarCantidad={modificarCantidad} traerArreglo={traerArreglo} />
+                <Guajolocombo traerArreglo={traerArreglo} modificarPrecio={modificarPrecio}/>
                 <BotonCarrito cant={cantidad} precio={precio} comboProducto={comboProducto} dataCart={dataCart} />
             </ChakraProvider>
         </div>
