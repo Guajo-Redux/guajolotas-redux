@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { starLogout, logout } from '../../actions/auth'
 import { Link } from 'react-router-dom'
 import { RiLoginBoxLine, RiLogoutBoxLine } from 'react-icons/ri'
+import { CgProfile } from 'react-icons/cg'
 
 const StyledTextEncabezado = styled.h1`
     font-family: Inter;
@@ -76,14 +77,26 @@ const Header = () => {
             <StyledGrid templateColumns="repeat(5, 1fr)" gap={4}>
                 <StyledLogo><img src="https://i.ibb.co/xLYZydk/logo.png" alt="Imagen de logo" /></StyledLogo>
                 <StyledLogoutContainer>
-                    <Link to="/carrito" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div style={{ margin: '0 30px' }}>
-                            <img src="https://i.ibb.co/ChmcXxb/vector-shop-cart.png" alt="vector-shop-cart" border="0" />
-                        </div>
-                    </Link>
+                    {
+                        isLoogedIn ?
+                            <div style = {{display: 'flex'}}>
+                                <Link to='/perfil'>
+                                    <div style={{ fontSize: '25px', opacity: '0.3' }}>
+                                        <CgProfile />
+                                    </div>
+                                </Link>
+                                <Link to="/carrito" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ margin: '0 30px' }}>
+                                        <img src="https://i.ibb.co/ChmcXxb/vector-shop-cart.png" alt="vector-shop-cart" border="0" />
+                                    </div>
+                                </Link>
+                            </div>
+                            :
+                            <p></p>
+                    }
                     {
                         !isLoogedIn ?
-                            <Link to = '/auth/login'>
+                            <Link to='/auth/login'>
                                 <div style={{ fontSize: '25px', opacity: '0.3' }}>
                                     <RiLoginBoxLine />
                                 </div>

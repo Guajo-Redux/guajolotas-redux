@@ -16,6 +16,7 @@ import { login } from '../actions/auth'
 import Carrito from '../containers/Cart/Carrito.jsx'
 import Descripcion from '../containers/descripcion/Descripcion';
 import { startLoadingBebidas, startLoadingGuajolotas } from '../actions/productAction'
+import Perfil from '../containers/Profile/Perfil.jsx'
 
 const App = () => {
 
@@ -54,11 +55,12 @@ const App = () => {
     <ChakraProvider>
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/home' component={Home} />
           <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
-          <PublicRoute path="/descripcion/:prodId" component={Descripcion} />
-          <Redirect to="/" />
+          <PrivateRoute path='/perfil' component={Perfil} isAuthenticated={isLoggedIn} />
+          <Route path="/descripcion/:prodId" component={Descripcion} />
+          <Redirect to="/home" />
         </Switch>
       </Router>
     </ChakraProvider>
