@@ -16,19 +16,16 @@ import { login } from '../actions/auth'
 import Carrito from '../containers/Cart/Carrito.jsx'
 import Descripcion from '../containers/descripcion/Descripcion';
 import { startLoadingBebidas, startLoadingGuajolotas } from '../actions/productAction'
-<<<<<<< HEAD
 import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components'
 import { startLoadingCart } from '../actions/cartAction';
+import Perfil from '../containers/Profile/Perfil.jsx'
 
 const Carga = styled(Spinner)`
      display:block;
      margin-left:auto;
      margin-right:auto;
 `
-=======
-import Perfil from '../containers/Profile/Perfil.jsx'
->>>>>>> 16b050e895a7d50c00755aa90e1a8e5e70a0269e
 
 const App = () => {
 
@@ -80,14 +77,9 @@ const App = () => {
           <Route exact path='/home' component={Home} />
           <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
-<<<<<<< HEAD
-          <Route path="/descripcion/:prodId" component={Descripcion} />
-          <Redirect to="/" />
-=======
           <PrivateRoute path='/perfil' component={Perfil} isAuthenticated={isLoggedIn} />
           <Route path="/descripcion/:prodId" component={Descripcion} />
           <Redirect to="/home" />
->>>>>>> 16b050e895a7d50c00755aa90e1a8e5e70a0269e
         </Switch>
       </Router>
     </ChakraProvider>
