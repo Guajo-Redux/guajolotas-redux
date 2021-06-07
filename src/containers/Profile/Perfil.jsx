@@ -1,11 +1,12 @@
 import React from 'react'
-import { Avatar, AvatarBadge, AvatarGroup, Wrap, Button, ButtonGroup, Stack, Input, InputGroup, InputLeftElement } from "@chakra-ui/react"
+import { Avatar, AvatarBadge, AvatarGroup, Wrap, Button, ButtonGroup, Stack, Input, InputGroup, InputLeftElement, Heading } from "@chakra-ui/react"
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 import { FaUserAlt } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { IoChevronBackOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 
 const StyledPerfilContainer = styled.div`
     height: 100vh;
@@ -34,17 +35,40 @@ let usuario = 'Maurico Cianci'
 let correo = 'chichocianci@gmail.com'
 
 const Perfil = () => {
+
+    // const {active} = useSelector(state => state.task)
+    const dispatch = useDispatch()
+   
+    const handlePictureClick = () => {
+        document.querySelector('#fileSelector').click();
+    }
+    
+    const handleFileChange = (e) => {
+        // const file = e.target.files[0];
+        // if ( file ) {
+        //     dispatch(startUploading(file))
+        // }
+    }
     return (
         <div>
             <StyledPerfilContainer>
-                <Link to = '/'>
+                <Link to='/'>
                     <IoChevronBackOutline style={{ position: 'absolute', fontSize: '20px', color: 'white', left: '10px', top: '10px' }} />
                 </Link>
+                {/* Input para cargar el archivo */}
+                <input
+                    id="fileSelector"
+                    type="file"
+                    name="file"
+                    style={{ display: 'none' }}
+                    onChange={handleFileChange}
+                />
                 <StyledColorContainer >
                 </StyledColorContainer>
                 <div style={{ textAlign: 'center' }}>
-                    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" style={{ position: 'relative', zIndex: '1', bottom: '20px' }} />
+                    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px'}} />
                 </div>
+                <Button onClick={handlePictureClick}>Cambiar</Button>
                 <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>
                     {usuario}
                 </div>
