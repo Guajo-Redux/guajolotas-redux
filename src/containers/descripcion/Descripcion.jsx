@@ -18,7 +18,7 @@ const Carga = styled(Spinner)`
 const Descripcion = () => {
     const [cantidad, setCantidad] = useState(0)
     const [precio, setPrecio] = useState(0)
-    const [comboProducto, setComboProducto] = useState([])
+    const [comboProducto, setComboProducto] = useState(undefined)
     const [dataCart, setDataCart] = useState([])
 
     const modificarCantidad = (valor) => {
@@ -42,7 +42,7 @@ const Descripcion = () => {
                 <Cantidad modificarCantidad={modificarCantidad} />
                 <Sabores />
                 <Guajolocombo traerArreglo={traerArreglo} modificarPrecio={modificarPrecio}/>
-                <BotonCarrito cant={cantidad} precio={precio} comboProducto={comboProducto} dataCart={dataCart} />
+                <BotonCarrito cant={cantidad} comboProducto={comboProducto} precio={precio} />
             </ChakraProvider>
         </div>
     )

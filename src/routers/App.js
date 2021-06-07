@@ -19,6 +19,7 @@ import { startLoadingBebidas, startLoadingGuajolotas } from '../actions/productA
 <<<<<<< HEAD
 import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components'
+import { startLoadingCart } from '../actions/cartAction';
 
 const Carga = styled(Spinner)`
      display:block;
@@ -43,11 +44,13 @@ const App = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       dispatch(startLoadingBebidas('bebidas'))
       dispatch(startLoadingGuajolotas('guajolotas'))
+      
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
 
         setIsLoggedIn(true);
-
+        
+        dispatch(startLoadingCart(user.uid))
       } else {
         setIsLoggedIn(false);
       }
