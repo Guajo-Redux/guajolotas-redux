@@ -79,7 +79,7 @@ const Header = () => {
                 <StyledLogoutContainer>
                     {
                         isLoogedIn ?
-                            <div style = {{display: 'flex'}}>
+                            <div style={{ display: 'flex' }}>
                                 <Link to='/perfil'>
                                     <div style={{ fontSize: '25px', opacity: '0.3' }}>
                                         <CgProfile />
@@ -110,10 +110,11 @@ const Header = () => {
             {/* <Link to="/search"> */}
             <Col xs={8} style={{ position: 'relative', marginTop: '32px', paddingLeft: "0" }}>
                 <img src='https://i.ibb.co/ssJCP66/vector-search.png' style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '20px', marginLeft: '25px', color: 'black', bottom: '1px', }} alt="Imagen del buscador" />
-
-                < StyledSearchInput type='search' style={{ paddingLeft: '35px', paddingRight: '35px', }} placeholder='Sabor de guajolota, bebida...' name="searchText"
-                    onClick={() => {
-                    }} />
+                <Link to="/busqueda">
+                    < StyledSearchInput type='search' style={{ paddingLeft: '35px', paddingRight: '35px', }} placeholder='Sabor de guajolota, bebida...' name="searchText"
+                        onClick={() => {
+                        }} />
+                </Link>
             </Col>
             {/* </Link> */}
         </>

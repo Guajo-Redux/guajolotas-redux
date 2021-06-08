@@ -21,6 +21,7 @@ import styled from 'styled-components'
 import { startLoadingCart } from '../actions/cartAction';
 import Perfil from '../containers/Profile/Perfil.jsx'
 import { startLoadingUser } from '../actions/userAction';
+import Search from '../components/search/Search';
 
 const Carga = styled(Spinner)`
      display:block;
@@ -81,6 +82,7 @@ const App = () => {
           <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/perfil' component={Perfil} isAuthenticated={isLoggedIn} />
           <Route path="/descripcion/:prodId" component={Descripcion} />
+          <Route path = "/busqueda" component={Search} ></Route>
           <Redirect to="/home" />
         </Switch>
       </Router>
