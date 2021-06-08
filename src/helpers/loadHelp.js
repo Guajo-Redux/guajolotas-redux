@@ -17,7 +17,7 @@ export const loadProducts = async (id) => {
 
 export const loadCart = async (id) => {
 
-    const cartSnap = await db.collection(`${id}/cart/productos`).get();
+    const cartSnap = await db.collection(`cart/${id}/productos`).get();
     const cart = [];
 
     cartSnap.forEach(snapHijo => {
