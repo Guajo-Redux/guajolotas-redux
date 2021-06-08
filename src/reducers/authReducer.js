@@ -3,7 +3,7 @@ import { types } from '../types/types'
 
 const inicialState = {
     profile: {
-        nombre: '',
+        name: '',
         email: '',
         image: 'https://bit.ly/dan-abramov',
         address: ''

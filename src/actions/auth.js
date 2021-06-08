@@ -20,23 +20,53 @@ export const startLoginEmailPassword = (email, password) => {
 export const startGoogleLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(googleAuthProvider)
-            .then(({ user }) => {
+            .then( async ({ user }) => {
+                const newUser = {
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL,
+                    address: ''
+                }
+
+                await db.collection(`profile/user/${user.uid}`).add(newUser)
+                dispatch(newProfile(user.uid, newUser))
+
                 dispatch(
                     login(user.uid, user.displayName),
                 )
             })
+            .catch(e => {
+                console.log(e);
+            }
+            )
     }
 }
 
 export const startFacebookLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(facebookAuthProvider)
-            .then(({ user }) => {
+            .then( async ({ user }) => {
+                const newUser = {
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL,
+                    address: ''
+                }
+                
+                console.log(user);
+                await db.collection(`profile/user/${user.uid}`).add(newUser)
+                dispatch(newProfile(user.uid, newUser))
+                
                 dispatch(
                     login(user.uid, user.displayName)
                 )
-                console.log(user);
             })
+            .catch(e => {
+                console.log(e);
+            }
+            )
     }
 }
 
@@ -44,7 +74,7 @@ export const startFacebookLogin = () => {
 export const startRegisterWithEmailPasswordName = (email, password, name, address) => {
     return (dispatch) => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(async ({ user }) => {
+            .then( async ({ user }) => {
 
                 const newUser = {
                     uid: user.uid,

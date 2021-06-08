@@ -7,7 +7,6 @@ import { MdEmail } from 'react-icons/md'
 import { IoChevronBackOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { authDb } from '../../firebase/firebase-config';
 import { BiPencil } from 'react-icons/bi'
 import { GrCamera } from 'react-icons/gr'
 import { startSaveUser, startUploading } from '../../actions/userAction'
