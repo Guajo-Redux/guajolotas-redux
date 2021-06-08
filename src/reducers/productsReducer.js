@@ -63,7 +63,17 @@ const initialState = {
             "imagen": "https://i.ibb.co/HzH8f48/g-guayabax4.png"
         }
     ],
-    active: null
+    bebidas: null,
+    guajolotas: null,
+    active: {
+        id: "guajo-0",
+        nombre: "Guajolota de Tamal Verde",
+        precio: 25,
+        nombreSabor: "Verde",
+        imagenSabor: "https://i.ibb.co/crTNfY4/s-verde.png",
+        imagen: "https://i.ibb.co/0y5fZTK/g-verdex4.png"
+    },
+    search: []
 }
 
 
@@ -74,7 +84,33 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 products: [...action.payload]
             }
-        
+        case types.searchProduct:
+            return {
+                ...state,
+                search: [...action.payload]
+            }
+        case types.productActive:
+            return {
+                ...state,
+                active: {
+                    ...action.payload
+                }
+            }
+        case types.productBebidas:
+            return {
+                ...state,
+                bebidas: [...action.payload]
+            }
+        case types.productGuajolotas:
+            return {
+                ...state,
+                guajolotas: [...action.payload]
+            }
+        case types.cleanSearch:
+            return {
+                ...state,
+                search: []
+            }
         default:
             return state
     }

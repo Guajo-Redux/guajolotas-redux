@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, Heading, Stack, StackDivider, Text, VStack } from '@chakra-ui/layout';
 import styled from 'styled-components'
 import { Image } from '@chakra-ui/image';
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Spinner } from 'react-bootstrap';
-// import { useSelector } from 'react-redux';
+import { activeProduct } from '../../actions/productAction';
+import { useDispatch } from 'react-redux';
 
 const StyledBoxProductos = styled(Box)`
     border-radius: 20px;
@@ -47,8 +48,23 @@ const Carga = styled(Spinner)`
 `
 
 const Productos = ({ productos }) => {
+    const [checking, setChecking] = useState(true);
 
-    if (productos === "") {
+    const dispatch = useDispatch()
+    const handleClickProduct = (product) => {
+        dispatch(
+            activeProduct(product.id, {
+                ...product
+            })
+        );
+
+    }
+
+    useEffect(() => {
+        setChecking(false);
+    }, [setChecking])
+
+    if (checking || productos === "") {
         return (
             <div>
                 <Carga animation="border" role="status">
@@ -67,19 +83,21 @@ const Productos = ({ productos }) => {
                 <Stack>
                     {productos.map(producto => {
                         return (
-                            // <Link to={`${section}/${producto.id}`}>
-                            <StyledBoxProductos key={`${producto.id}`}>
-                                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                                    <Box w="100%" h="10" marginTop="-10px">
-                                        <StyledImageProducto src={producto.imagen} alt="Guajalota verde" />
-                                    </Box>
-                                    <Box w="100%" h="10" marginLeft="-50px" marginTop="20px">
-                                        <StyledHeadign fontSize="xl">{producto.nombreSabor}</StyledHeadign>
-                                        <StyledTextPrecio mt={4}>{producto.precio} MX</StyledTextPrecio>
-                                    </Box>
-                                </Grid>
-                            </StyledBoxProductos>
-                            // </Link>
+                            <Link to={`/descripcion/${producto.id}`}
+                                key={`home-${producto.id}`}>
+                                <StyledBoxProductos onClick={() =>
+                                    handleClickProduct(producto)}>
+                                    <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                                        <Box w="100%" h="10" marginTop="-10px">
+                                            <StyledImageProducto src={producto.imagen} alt="Guajalota verde" />
+                                        </Box>
+                                        <Box w="100%" h="10" marginLeft="-50px" marginTop="20px">
+                                            <StyledHeadign fontSize="xl">{producto.nombreSabor}</StyledHeadign>
+                                            <StyledTextPrecio mt={4}>{producto.precio} MX</StyledTextPrecio>
+                                        </Box>
+                                    </Grid>
+                                </StyledBoxProductos>
+                            </Link>
                         )
                     })}
                 </Stack>
