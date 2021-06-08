@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/guajolotas-redux/static/js/main.dfa33473.chunk.js",
+    "main.js.map": "/guajolotas-redux/static/js/main.dfa33473.chunk.js.map",
+    "runtime-main.js": "/guajolotas-redux/static/js/runtime-main.62c343bb.js",
+    "runtime-main.js.map": "/guajolotas-redux/static/js/runtime-main.62c343bb.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/guajolotas-redux/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.b648f356.chunk.js": "/guajolotas-redux/static/js/2.b648f356.chunk.js",
+    "static/js/2.b648f356.chunk.js.map": "/guajolotas-redux/static/js/2.b648f356.chunk.js.map",
+    "index.html": "/guajolotas-redux/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/guajolotas-redux/static/css/2.4c97ca4f.chunk.css.map",
+    "static/js/2.b648f356.chunk.js.LICENSE.txt": "/guajolotas-redux/static/js/2.b648f356.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.62c343bb.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.b648f356.chunk.js",
+    "static/js/main.dfa33473.chunk.js"
+  ]
+}
