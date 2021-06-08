@@ -97,24 +97,26 @@ const Login = () => {
                 </Col>
             </Row>
             <StyledFormMainContainer className='container'>
-                {/* Nombre de usuario */}
-                <Form.Group style={{ position: 'relative' }}>
-                    <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Nombre de usuario</Form.Label>
-                    <FaUserAlt
-                        style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
-                    />
-                    <Form.Control type="text" placeholder="Ingrese Usuario" id='user' style={{ paddingLeft: '35px', paddingRight: '35px' }} />
-                </Form.Group>
-                {/* Contraseña */}
-                <Form.Group style={{ position: 'relative' }}>
-                    <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Contraseña</Form.Label>
-                    <FaLock
-                        style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
-                    />
-                    <Form.Control type="password" placeholder="Ingrese Contraseña" id='password' style={{ paddingLeft: '35px', paddingRight: '35px' }} />
-                </Form.Group>
-                <StyledButtom >Entrar
-                </StyledButtom>
+                <Form onSubmit={handleSubmit}>
+                    {/* Nombre de usuario */}
+                    <Form.Group style={{ position: 'relative' }}>
+                        <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Nombre de usuario</Form.Label>
+                        <FaUserAlt
+                            style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
+                        />
+                        <Form.Control type="email" placeholder="Ingrese Usuario" id='user' style={{ paddingLeft: '35px', paddingRight: '35px' }} name='email' value={email} onChange={ handleInputChange } />
+                    </Form.Group>
+                    {/* Contraseña */}
+                    <Form.Group style={{ position: 'relative' }}>
+                        <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Contraseña</Form.Label>
+                        <FaLock
+                            style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
+                        />
+                        <Form.Control type="password" placeholder="Ingrese Contraseña" id='password' style={{ paddingLeft: '35px', paddingRight: '35px' }} name='password' value={password} onChange={ handleInputChange } />
+                    </Form.Group>
+                    <StyledButtom type='submit' >Entrar
+                    </StyledButtom>
+                </Form>
                 <Row>
                     <StyleButtonContainer xs={12}>
                         <StyledButtonGoogle variant="primary" type='submit'
