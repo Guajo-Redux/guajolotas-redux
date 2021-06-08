@@ -1,4 +1,4 @@
-import { loadProducts } from "../helpers/loadHelp";
+import { loadProducts, loadSearch } from "../helpers/loadHelp";
 import { types } from "../types/types";
 
 export const startLoadingProducts = (id) => {
@@ -21,7 +21,6 @@ export const activeProduct = (id, product) => ({
         ...product
     }
 });
-
 
 export const startLoadingBebidas = (id) => {
     return async (dispatch) => {
@@ -48,4 +47,16 @@ export const startLoadingGuajolotas = (id) => {
 export const setProductsGuajolotas = (guajolotas) => ({
     type: types.productGuajolotas,
     payload: guajolotas
+});
+
+export const startSearch = (search) => {
+    return async (dispatch) => {
+        const producto = await loadSearch(search)
+        dispatch(setSearch(producto))
+    }
+}
+
+export const setSearch = (products) => ({
+    type: types.searchProduct,
+    payload: products
 });

@@ -72,7 +72,8 @@ const initialState = {
         nombreSabor: "Verde",
         imagenSabor: "https://i.ibb.co/crTNfY4/s-verde.png",
         imagen: "https://i.ibb.co/0y5fZTK/g-verdex4.png"
-    }
+    },
+    search: []
 }
 
 
@@ -82,6 +83,11 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: [...action.payload]
+            }
+        case types.searchProduct:
+            return {
+                ...state,
+                search: [...action.payload]
             }
         case types.productActive:
             return {

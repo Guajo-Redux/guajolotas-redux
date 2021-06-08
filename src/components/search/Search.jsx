@@ -6,6 +6,14 @@ import { useForm } from '../../hooks/useForm';
 import styled from 'styled-components';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom"
+import { Button } from '@chakra-ui/button';
+import { useDispatch, useSelector } from 'react-redux';
+import { startSearch } from '../../actions/productAction';
+import { Box } from '@chakra-ui/layout';
+import { Heading } from '@chakra-ui/layout';
+import { Text } from '@chakra-ui/layout';
+import { Grid } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/image';
 
 const StyledSearchContainer = styled(Container)`
     background: #F2F2F2;
@@ -48,22 +56,34 @@ const StyledResultadoOneSearch = styled.p`
     line-height: 20px;
 `
 
-const RealizarBusqueda = ({ productoFilter }) => {
+const RealizarBusqueda = () => {
+    const { search } = useSelector(state => state.products)
     return (
         <div style={{ textAlign: "-webkit-center" }}>
-            <img src='https://i.ibb.co/CwB3fBC/vector-feather-search.png' alt="Icono de busqueda" />
-            <StyledResultadoOneSearch>Realizar una búsqueda</StyledResultadoOneSearch>
-            {/* <StyledBoxProductos key={`${productoFilter.id}`}>
-                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                    <Box w="100%" h="10" marginTop="-10px">
-                        <StyledImageProducto src={productoFilter.imagen} alt="Guajalota verde" />
-                    </Box>
-                    <Box w="100%" h="10" marginLeft="-50px" marginTop="20px">
-                        <StyledHeadign fontSize="xl">{productoFilter.sabor.nombreSabor}</StyledHeadign>
-                        <StyledTextPrecio mt={4}>{productoFilter.precio} MX</StyledTextPrecio>
-                    </Box>
-                </Grid>
-            </StyledBoxProductos> */}
+
+            {
+                search.length < 1
+                    ?
+                    <>
+                        <img src='https://i.ibb.co/CwB3fBC/vector-feather-search.png' alt="Icono de busqueda" />
+                        <StyledResultadoOneSearch>Realizar una búsqueda</StyledResultadoOneSearch>
+                    </>
+                    :
+                    search.map(producto => {
+                        return (
+                            <Box key={`${producto.id}`}>
+                                <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+                                    <Box w="30%" h="10" marginTop="-10px">
+                                        <Image src={producto.imagen} alt="Guajalota verde" />
+                                    </Box>
+                                    <Box w="100%" h="10" marginLeft="-50px" marginTop="20px">
+                                        <Heading fontSize="xl">{producto.nombreSabor}</Heading>
+                                        <Text mt={4}>{producto.precio} MX</Text>
+                                    </Box>
+                                </Grid>
+                            </Box>)
+                    })
+            }
         </div>
     )
 }
@@ -77,24 +97,17 @@ const NoEncontrado = () => {
     )
 }
 
-const Search = ({ history }) => {
-    // const [stateSearch, setSearch] = useState(true)
-    // const location = useLocation();
+const Search = () => {
 
-    // const { palabra = '' } = queryString.parse(location.search)
+    const dispatch = useDispatch()
+    const [filter, setFilter] = useState('')
+    const { uid } = useSelector(state => state.auth)
 
-    // const [formValues, handleInputChange] = useForm({
-    //     searchText: palabra
-    // })
-
-    // const { searchText } = formValues
-
-    // const productoFilter = useMemo(() => getProductoName(palabra), [palabra])
-
-    // const handleSearch = (e) => {
-    //     e.preventDefault()
-    //     history.push(`?palabra=${searchText}`)
-    // }
+    const handleDataSearch = (e) => {
+        e.preventDefault()
+        console.log("Buscar", filter);
+        dispatch(startSearch(filter.toLowerCase()))
+    }
 
     return (
         <React.Fragment>
@@ -102,8 +115,11 @@ const Search = ({ history }) => {
                 <Row>
                     <Col xs={8} style={{ position: 'relative', margin: '0px', marginTop: '44px' }}>
                         <img src='https://i.ibb.co/ssJCP66/vector-search.png' style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '20px', marginLeft: '25px', color: 'black', bottom: '1px', }} alt="Icono de busqueda" />
-                        <form >
-                            < StyledSearchInput type='search' style={{ paddingLeft: '35px', paddingRight: '35px', }} placeholder='Sabor de guajolo...' name="searchText" />
+                        <form onSubmit={handleDataSearch}>
+                            < StyledSearchInput type='search' style={{ paddingLeft: '35px', paddingRight: '35px', }} placeholder='Sabor de guajolo...' name="search" onChange={(e) => {
+                                setFilter(e.target.value)
+                            }} />
+                            <Button type="submit">Search</Button>
                         </form>
                     </Col>
                     <StyledTextCancelar xs={4}>
@@ -113,57 +129,11 @@ const Search = ({ history }) => {
                 < StyledRowContainerMainImage>
                     <Col xs={12}>
                         {
-                            <RealizarBusqueda /> 
+                            <RealizarBusqueda />
                         }
                     </Col>
                 </ StyledRowContainerMainImage>
             </StyledSearchContainer>
-
-
-            {/*<div className="row">
-
-                 <h4> Results </h4>
-<hr />
-
-{
-    (palabra === '')
-    &&
-    <div className="alert alert-info">
-        Producto no encontrado
-            </div>
-}
-
-{/* {
-    (palabra !== '' && productoFilter.length === 0)
-    &&
-    <div className="alert alert-danger">
-        Ese producto no lo conozco we {palabra}
-    </div>
-} */}
-
-            {
-                // productoFilter.map(p => (
-                // <Productos
-                //     key={p.id}
-                //     {...p}
-                // />
-
-
-                // <StyledBoxProductos key={`${productoFilter.id}`}>
-                //     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                //         <Box w="100%" h="10" marginTop="-10px">
-                //             <StyledImageProducto src={productoFilter.imagen} alt="Guajalota verde" />
-                //         </Box>
-                //         <Box w="100%" h="10" marginLeft="-50px" marginTop="20px">
-                //             <StyledHeadign fontSize="xl">{productoFilter.sabor.nombreSabor}</StyledHeadign>
-                //             <StyledTextPrecio mt={4}>{productoFilter.precio} MX</StyledTextPrecio>
-                //         </Box>
-                //     </Grid>
-                // </StyledBoxProductos>
-
-                // ))
-            }
-            {/* </div> */}
         </React.Fragment >
     )
 }
