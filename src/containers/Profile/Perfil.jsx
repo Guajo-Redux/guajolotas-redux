@@ -7,7 +7,11 @@ import { MdEmail } from 'react-icons/md'
 import { IoChevronBackOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { authDb } from '../../firebase/firebase-config';
+import { BiPencil } from 'react-icons/bi'
+import { GrCamera } from 'react-icons/gr'
 import { startSaveUser, startUploading } from '../../actions/userAction'
+import { IoCamera } from 'react-icons/io5'
 
 const StyledPerfilContainer = styled.div`
     height: 100vh;
@@ -31,9 +35,27 @@ const StyledColorContainer = styled.div`
     position: relative;
     z-index: -1;
 `
+const StyledButtonEdit = styled.div`
+    text-align: center;
+    margin-top: 30px;
+`
+const StyledButtonEditSelect = styled(Button)`
+    background: #FA4A0C !important;
+    color: white;
+`
+const StyledEditarPerfil = styled.p`
+    font-size: 18px;
+    font-weight: bold;
+`
+
 
 const Perfil = () => {
-    // const {active} = useSelector(state => state.task)
+
+    const [iconos, setIconos] = useState(false)
+
+    const cambiarIcono = () => {
+        setIconos(!iconos)
+    }
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.user);
@@ -88,7 +110,7 @@ const Perfil = () => {
 
         console.log(file);
 
-        if ( file ) {
+        if (file) {
             dispatch(startUploading(file))
         }
 
@@ -96,7 +118,7 @@ const Perfil = () => {
 
     if (user[0] === undefined) {
         return (
-          <h1>Wait...</h1>
+            <h1>Wait...</h1>
         )
     }
 
@@ -114,17 +136,30 @@ const Perfil = () => {
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />
+                {/* Lapiz */}
+                {/* <BiPencil style = {{color: 'white'}}/>  */}
                 <StyledColorContainer >
                 </StyledColorContainer>
                 <div style={{ textAlign: 'center' }}>
-                    <Avatar name="Dan Abrahmov" src={user[0].image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} />
+                    {
+                        aInput ?
+                            <div>
+                                <Avatar name="Dan Abrahmov" src={user[0].image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
+                                    <AvatarBadge style={{ border: 'none', background: '#FA4A0C', padding: '7px', marginRight: '10px', color: 'white' }} onClick={handlePictureClick}>
+                                        <IoCamera />
+                                    </AvatarBadge>
+                                </Avatar>
+                                <StyledEditarPerfil>Editar Perfil</StyledEditarPerfil>
+                            </div>
+                            :
+                            <Avatar name="Dan Abrahmov" src={user[0].image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
+                            </Avatar>
+                    }
                 </div>
                 {
                     !aInput
                         ?
                         <div>
-                            <Button onClick={handleAInputClick}>Editar</Button>
-
                             <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>
                                 {user[0].name}
                             </div>
@@ -134,11 +169,12 @@ const Perfil = () => {
                             <div style={{ textAlign: 'center' }}>
                                 {user[0].address}
                             </div>
+                            <StyledButtonEdit>
+                                <StyledButtonEditSelect onClick={handleAInputClick} >Editar</StyledButtonEditSelect>
+                            </StyledButtonEdit>
                         </div>
                         :
                         <div>
-                            <Button onClick={handleAInputClick}>Volver</Button>
-
                             <StyledStack spacing={4} >
                                 <InputGroup>
                                     <InputLeftElement
@@ -156,7 +192,7 @@ const Perfil = () => {
                                     <Input type='email' ref={email} placeholder={user[0].email} />
                                 </InputGroup>
 
-                                <Button onClick={handlePictureClick}>Picture</Button>   
+                                {/* <Button onClick={handlePictureClick}>Picture</Button> */}
 
                                 <InputGroup>
                                     <InputLeftElement
@@ -168,9 +204,10 @@ const Perfil = () => {
                             </StyledStack>
 
                             <StyledContainerButton >
+                                <Button onClick={handleAInputClick} style={{ background: '#FA4A0C', color: 'white', marginRight: '20px' }} >Volver</Button>
                                 <Button onClick={editarUser} variant="solid" style={{ background: '#FA4A0C', color: 'white' }} >
                                     Guardar
-                    </Button>
+                                </Button>
                             </StyledContainerButton>
                         </div>
                 }
