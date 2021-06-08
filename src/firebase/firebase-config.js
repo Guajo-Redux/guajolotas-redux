@@ -14,8 +14,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-const authDb = firebase.auth();
-console.log(authDb);
+
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 
@@ -23,6 +22,5 @@ export {
   db,
   googleAuthProvider,
   facebookAuthProvider,
-  firebase,
-  authDb
+  firebase
 }

@@ -2,14 +2,12 @@
 
 export const fileUpload = async ( file ) => {
 
-    const cloudUrl = 'https://api.cloudinary.com/v1_1/db9wh5uvt/image/upload';
-
+    const cloudUrl = 'https://api.cloudinary.com/v1_1/duufbbamz/image/upload';
     const formData = new FormData();
-    formData.append('upload_preset','react-app');
+    formData.append('upload_preset','guappjolotas');
     formData.append('file', file );
 
     try {
-        
         const resp = await fetch( cloudUrl, {
             method: 'POST',
             body: formData
