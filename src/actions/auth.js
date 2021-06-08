@@ -1,76 +1,75 @@
-import {types} from '../types/types'
-import {googleAuthProvider, firebase, facebookAuthProvider, db} from '../firebase/firebase-config'
-import {starLoading, finishLoading} from './uiError'
-
-
+import { types } from '../types/types'
+import { googleAuthProvider, firebase, facebookAuthProvider, db } from '../firebase/firebase-config'
+import { starLoading, finishLoading } from './uiError'
 
 export const startLoginEmailPassword = (email, password) => {
-    return (dispatch) => { 
-        return firebase.auth().signInWithEmailAndPassword(email,password)
-        .then(({user})=> {
-            dispatch(starLoading)
-            dispatch(login(user.uid, user.displayName))
-        })
-        .catch (e => {
-            dispatch(finishLoading)
-            console.log(e);
-        })
+    return (dispatch) => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+                dispatch(login(user.uid, user.displayName))
+                dispatch(finishLoading())
+                dispatch(starLoading())
+            })
+            .catch(e => {
+                dispatch(finishLoading())
+                console.log(e);
+            })
     }
 }
 
 export const startGoogleLogin = () => {
-    return (dispatch) => { 
+    return (dispatch) => {
         firebase.auth().signInWithPopup(googleAuthProvider)
-        .then(({user}) => {
-            dispatch(
-                login(user.uid, user.displayName),
-            )
-        })
+            .then(({ user }) => {
+                dispatch(
+                    login(user.uid, user.displayName),
+                )
+            })
     }
 }
 
 export const startFacebookLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(facebookAuthProvider)
-        .then(({user}) => {
-            dispatch(
-                login(user.uid, user.displayName)
-            )
-            console.log(user);
-        })
+            .then(({ user }) => {
+                dispatch(
+                    login(user.uid, user.displayName)
+                )
+                console.log(user);
+            })
     }
 }
 
 
 export const startRegisterWithEmailPasswordName = (email, password, name, address) => {
-    return (dispatch) => { 
+    return (dispatch) => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(async({user}) => {
+            .then(async ({ user }) => {
 
-            const newUser = {
-                uid: user.uid,
-                name,
-                email,
-                image: 'https://bit.ly/dan-abramov',
-                address,
+                const newUser = {
+                    uid: user.uid,
+                    name,
+                    email,
+                    image: 'https://bit.ly/dan-abramov',
+                    address,
+                }
+                await db.collection(`profile/user/${user.uid}`).add(newUser)
+                dispatch(newProfile(user.uid, newUser))
+
+                await user.updateProfile({ displayName: name })
+                dispatch(
+                    login(user.uid, user.displayName)
+                )
+            })
+            .catch(e => {
+                console.log(e);
             }
-            await db.collection(`profile/user/${user.uid}`).add(newUser)
-            dispatch(newProfile(user.uid, newUser))
-            
-            await user.updateProfile({displayName: name})
-            dispatch(
-                login(user.uid, user.displayName)
             )
-            console.log(user);
-        })
-        .catch(e => {
-            console.log(e);
-        })
-        
+
     }
 }
 export const login = (uid, displayName) => {
-    return{
+    return {
         type: types.login,
         payload: {
             uid,
@@ -91,7 +90,7 @@ export const logout = () => ({
 })
 
 export const userData = (usuario, email) => {
-    return{
+    return {
         type: userData,
         payload: {
             usuario,

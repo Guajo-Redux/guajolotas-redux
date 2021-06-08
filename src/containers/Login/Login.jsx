@@ -97,56 +97,58 @@ const Login = () => {
                 </Col>
             </Row>
             <StyledFormMainContainer className='container'>
-                {/* Nombre de usuario */}
-                <Form.Group style={{ position: 'relative' }}>
-                    <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Nombre de usuario</Form.Label>
-                    <FaUserAlt
-                        style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
-                    />
-                    <Form.Control type="text" placeholder="Ingrese Usuario" id='user' style={{ paddingLeft: '35px', paddingRight: '35px' }} />
-                </Form.Group>
-                {/* Contraseña */}
-                <Form.Group style={{ position: 'relative' }}>
-                    <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Contraseña</Form.Label>
-                    <FaLock
-                        style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
-                    />
-                    <Form.Control type="password" placeholder="Ingrese Contraseña" id='password' style={{ paddingLeft: '35px', paddingRight: '35px' }} />
-                </Form.Group>
-                <StyledButtom >Entrar
+                <form onSubmit={handleSubmit}>
+                    {/* Nombre de usuario */}
+                    <Form.Group style={{ position: 'relative' }}>
+                        <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Nombre de usuario</Form.Label>
+                        <FaUserAlt
+                            style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
+                        />
+                        <Form.Control type="email" placeholder="Ingrese Usuario" id='user' style={{ paddingLeft: '35px', paddingRight: '35px' }} value={email} name="email" onChange={handleInputChange} />
+                    </Form.Group>
+                    {/* Contraseña */}
+                    <Form.Group style={{ position: 'relative' }}>
+                        <Form.Label className='mt-2 mb-2' style={{ fontWeight: 'bold' }}>Contraseña</Form.Label>
+                        <FaLock
+                            style={{ position: 'absolute', pointerEvents: 'none', marginBottom: '10px', marginLeft: '10px', color: 'black', left: '1px', bottom: '1px' }}
+                        />
+                        <Form.Control type="password" placeholder="Ingrese Contraseña" id='password' style={{ paddingLeft: '35px', paddingRight: '35px' }} value={password} name="password" onChange={handleInputChange} />
+                    </Form.Group>
+                    <StyledButtom type="submit">Entrar
                 </StyledButtom>
-                <Row>
-                    <StyleButtonContainer xs={12}>
-                        <StyledButtonGoogle variant="primary" type='submit'
-                            onClick={handleGoogleLogin}
+                    <Row>
+                        <StyleButtonContainer xs={12}>
+                            <StyledButtonGoogle variant="primary" type='submit'
+                                onClick={handleGoogleLogin}
 
-                        >
-                            <div style={{ padding: '10px' }}>
-                                <FcGoogle />
-                            </div>
+                            >
+                                <div style={{ padding: '10px' }}>
+                                    <FcGoogle />
+                                </div>
                                                 Continuar con Google
                         </StyledButtonGoogle>
-                        <StyledButtonGoogle variant="primary" type='submit'
-                            onClick={handleFacebook}
+                            <StyledButtonGoogle variant="primary" type='submit'
+                                onClick={handleFacebook}
 
-                        >
-                            <div style={{ padding: '10px' }}>
-                                <RiFacebookFill />
-                            </div>
+                            >
+                                <div style={{ padding: '10px' }}>
+                                    <RiFacebookFill />
+                                </div>
                                                 Continuar con Facebook
                         </StyledButtonGoogle>
-                        <Row>
-                            <Link to='/auth/registro' >
-                                <Col xs={12} style={{ marginTop: '30px', }}>
-                                    <Button variant='secondary'>
-                                        Crear una Nueva Cuenta
+                            <Row>
+                                <Link to='/auth/registro' >
+                                    <Col xs={12} style={{ marginTop: '30px', }}>
+                                        <Button variant='secondary'>
+                                            Crear una Nueva Cuenta
                                 </Button>
 
-                                </Col>
-                            </Link>
-                        </Row>
-                    </StyleButtonContainer>
-                </Row>
+                                    </Col>
+                                </Link>
+                            </Row>
+                        </StyleButtonContainer>
+                    </Row>
+                </form>
             </StyledFormMainContainer>
         </StyledFormContainer>
     )
