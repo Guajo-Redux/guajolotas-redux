@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, AvatarBadge, AvatarGroup, Wrap, Button, ButtonGroup, Stack, Input, InputGroup, InputLeftElement, Heading } from "@chakra-ui/react"
 import { Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -6,8 +6,10 @@ import { FaUserAlt } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { IoChevronBackOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { authDb } from '../../firebase/firebase-config';
+import { BiPencil } from 'react-icons/bi'
+import { GrCamera } from 'react-icons/gr'
 
 const StyledPerfilContainer = styled.div`
     height: 100vh;
@@ -37,21 +39,19 @@ let correo = 'chichocianci@gmail.com'
 
 const Perfil = () => {
 
+    const [iconos, setIconos] = useState(false)
     console.log(authDb);
-    
-    // const {active} = useSelector(state => state.task)
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.auth);
-    console.log(data);
-    console.log(data.name);
-    console.log(data.uid);
 
-//   const user = useSelector(state => state.user)
-//   console.log(user)
+    const cambiarIcono = () => {
+        setIconos(!iconos)
+    }
+    // const {active} = useSelector(state => state.task)
+    const { user } = useSelector(state => state.user)
+    console.log(user)
     const handlePictureClick = () => {
         document.querySelector('#fileSelector').click();
     }
-    
+
     const handleFileChange = (e) => {
         // const file = e.target.files[0];
         // if ( file ) {
@@ -75,7 +75,13 @@ const Perfil = () => {
                 <StyledColorContainer >
                 </StyledColorContainer>
                 <div style={{ textAlign: 'center' }}>
-                    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px'}} />
+                    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
+                        <AvatarBadge style={{ border: 'none', background: '#FA4A0C', padding: '7px', marginRight: '10px', color: 'white' }} onClick={cambiarIcono}>
+                            {
+                                !iconos ? <BiPencil style = {{color: 'white'}}/> : <GrCamera style = {{color: 'white'}}/>
+                            }
+                        </AvatarBadge>
+                    </Avatar>
                 </div>
                 <Button onClick={handlePictureClick}>Cambiar</Button>
                 <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>
