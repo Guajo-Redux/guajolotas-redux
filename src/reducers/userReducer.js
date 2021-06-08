@@ -1,16 +1,10 @@
 import {types} from '../types/types'
 
-const initialState = {
-    user:[]
-}
-
-export const userReducer = ( state = initialState, action) => {
-    
+export const userReducer = ( state = {}, action) => {
       switch (action.type) {
           case types.loadUser:
               return {
-                  ...state,
-                  user: [...action.payload]
+                  ...action.payload
               }              
       
           default:

@@ -20,6 +20,7 @@ export const types = {
     cartUpdate: 'Update Cart',
     cartActive: 'Active Cart',
     cartDelete: 'Delete Cart',
+
     addUser: 'Agregar Usuario',
     updateUser: 'Actualizar Usuario',
     loadUser: 'Load user'

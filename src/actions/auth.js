@@ -55,8 +55,8 @@ export const startRegisterWithEmailPasswordName = (email, password, name, addres
                 address,
             }
             await db.collection(`profile/user/${user.uid}`).add(newUser)
-
             dispatch(newProfile(user.uid, newUser))
+            
             await user.updateProfile({displayName: name})
             dispatch(
                 login(user.uid, user.displayName)
