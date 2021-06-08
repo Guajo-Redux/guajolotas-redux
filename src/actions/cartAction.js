@@ -13,7 +13,7 @@ export const AddCarrito = (nombre, precio, imagen, cantidad) => {
             cantidad
         }
 
-        await db.collection(`${uid}/cart/productos`).add(newProduct)
+        await db.collection(`cart/${uid}/productos`).add(newProduct)
         dispatch(addNewProduct(uid, newProduct))
         dispatch(startLoadingCart(uid))
     }
@@ -48,7 +48,7 @@ export const startSaveCart = ( cart ) => {
         const cartToFirestore = { ...cart };
         delete cartToFirestore.id;
 
-        await db.doc(`${uid}/cart/productos/${cart.id}`).update( cartToFirestore );
+        await db.doc(`cart/${uid}/productos/${cart.id}`).update( cartToFirestore );
 
         dispatch( refreshCart( cart.id, cartToFirestore ) );
         dispatch(startLoadingCart(uid))
@@ -79,7 +79,7 @@ export const startDeletingCart = ( id ) => {
          
         const uid = getState().auth.uid;
 
-        await db.doc(`${uid}/cart/productos/${ id }`).delete();
+        await db.doc(`cart/${uid}/productos/${ id }`).delete();
 
         dispatch( deleteCart(id) );
     }
