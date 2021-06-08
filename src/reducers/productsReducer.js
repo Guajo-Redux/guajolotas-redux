@@ -106,6 +106,11 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 guajolotas: [...action.payload]
             }
+        case types.cleanSearch:
+            return {
+                ...state,
+                search: []
+            }
         default:
             return state
     }

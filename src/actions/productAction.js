@@ -60,3 +60,13 @@ export const setSearch = (products) => ({
     type: types.searchProduct,
     payload: products
 });
+
+export const starCleanSearch = () => {
+    return async (dispatch) => {
+        dispatch(cleanBusqueda());
+    }
+}
+
+export const cleanBusqueda = () => ({
+    type: types.cleanSearch
+})

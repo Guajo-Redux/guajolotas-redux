@@ -14,7 +14,9 @@ export const types = {
     productActive: '[Products] Active Product',
     productBebidas: '[Products] Guajocombo Bebidas',
     productGuajolotas: '[Products] Guajocombo Guajolotas',
+
     searchProduct: '[Products] Busqueda producto', 
+    cleanSearch: '[Products] Limpiar busqueda',
 
     cartAD: 'Add Cart',
     cartLoad: 'Load Cart',

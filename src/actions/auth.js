@@ -108,9 +108,3 @@ export const newProfile = (uid, user) => {
         }
     }
 }
-
-export const updateProfile = () => {
-    return {
-
-    }
-}
