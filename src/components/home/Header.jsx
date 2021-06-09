@@ -6,8 +6,9 @@ import { Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { starLogout, logout } from '../../actions/auth'
 import { Link } from 'react-router-dom'
-import { RiLoginBoxLine, RiLogoutBoxLine } from 'react-icons/ri'
+import { RiLoginBoxLine, RiLogoutBoxLine, RiAdminLine } from 'react-icons/ri'
 import { CgProfile } from 'react-icons/cg'
+
 
 const StyledTextEncabezado = styled.h1`
     font-family: Inter;
@@ -53,6 +54,11 @@ const StyledLogoutContainer = styled.div`
 const Header = () => {
 
     const dispatch = useDispatch()
+
+    const auth = useSelector(state => state.auth)
+
+    console.log(auth.email);
+
     const handleLogout = () => {
         dispatch(starLogout())
     }
@@ -78,10 +84,19 @@ const Header = () => {
                 <StyledLogo><img src="https://i.ibb.co/xLYZydk/logo.png" alt="Imagen de logo" /></StyledLogo>
                 <StyledLogoutContainer>
                     {
+                        auth.email == 'chicholoncia@gmail.com'
+                        &&
+                        <Link to='/prueba'>
+                            <div style={{ fontSize: '25px', opacity: '0.3' }}>
+                                <RiAdminLine />
+                            </div>
+                        </Link>
+                    }
+                    {
                         isLoogedIn ?
                             <div style={{ display: 'flex' }}>
                                 <Link to='/perfil'>
-                                    <div style={{ fontSize: '25px', opacity: '0.3' }}>
+                                    <div style={{ fontSize: '25px', opacity: '0.3', marginLeft: '30px' }}>
                                         <CgProfile />
                                     </div>
                                 </Link>

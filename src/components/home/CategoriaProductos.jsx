@@ -10,11 +10,11 @@ const CategoriaProductos = () => {
     const categories = ["guajolotas", "bebidas", "tamales"]
 
     const handleClickCategorie = (category) => {
-        dispatch(startLoadingProducts(category))
-        
-        
+        dispatch(startLoadingProducts(category))  
     }
+
     const { products } = useSelector(state => state.products)
+    
     return (
         <ChakraProvider>
             <Tabs isFitted variant="enclosed" style={{ marginTop: "40px" }} color="#9A9A9D">

@@ -6,7 +6,7 @@ export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName))
+                dispatch(login(user.uid, user.displayName, user.email))
                 dispatch(finishLoading())
                 dispatch(starLoading())
             })
@@ -21,19 +21,19 @@ export const startGoogleLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(googleAuthProvider)
             .then( async ({ user }) => {
-                const newUser = {
-                    uid: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL,
-                    address: ''
-                }
+                // const newUser = {
+                //     uid: user.uid,
+                //     name: user.displayName,
+                //     email: user.email,
+                //     image: user.photoURL,
+                //     address: ''
+                // }
 
-                await db.collection(`profile/user/${user.uid}`).add(newUser)
-                dispatch(newProfile(user.uid, newUser))
+                // await db.collection(`profile/user/${user.uid}`).add(newUser)
+                // dispatch(newProfile(user.uid, newUser))
 
                 dispatch(
-                    login(user.uid, user.displayName),
+                    login(user.uid, user.displayName, user.email),
                 )
             })
             .catch(e => {
@@ -47,20 +47,22 @@ export const startFacebookLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(facebookAuthProvider)
             .then( async ({ user }) => {
-                const newUser = {
-                    uid: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL,
-                    address: ''
-                }
+                // const newUser = {
+                //     uid: user.uid,
+                //     name: user.displayName,
+                //     email: user.email,
+                //     image: user.photoURL,
+                //     address: ''
+                // }
+                
+                // console.log(user);
+                // await db.collection(`profile/user/${user.uid}`).add(newUser)
+                // dispatch(newProfile(user.uid, newUser))
                 
                 console.log(user);
-                await db.collection(`profile/user/${user.uid}`).add(newUser)
-                dispatch(newProfile(user.uid, newUser))
-                
+
                 dispatch(
-                    login(user.uid, user.displayName)
+                    login(user.uid, user.displayName, user.email)
                 )
             })
             .catch(e => {
@@ -71,24 +73,24 @@ export const startFacebookLogin = () => {
 }
 
 
-export const startRegisterWithEmailPasswordName = (email, password, name, address) => {
+export const startRegisterWithEmailPasswordName = (email, password, name) => {
     return (dispatch) => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then( async ({ user }) => {
 
-                const newUser = {
-                    uid: user.uid,
-                    name,
-                    email,
-                    image: 'https://bit.ly/dan-abramov',
-                    address,
-                }
-                await db.collection(`profile/user/${user.uid}`).add(newUser)
-                dispatch(newProfile(user.uid, newUser))
+                // const newUser = {
+                //     uid: user.uid,
+                //     name,
+                //     email,
+                //     image: 'https://bit.ly/dan-abramov',
+                //     address,
+                // }
+                // await db.collection(`profile/user/${user.uid}`).add(newUser)
+                // dispatch(newProfile(user.uid, newUser))
 
                 await user.updateProfile({ displayName: name })
                 dispatch(
-                    login(user.uid, user.displayName)
+                    login(user.uid, user.displayName, user.email)
                 )
             })
             .catch(e => {
@@ -98,12 +100,13 @@ export const startRegisterWithEmailPasswordName = (email, password, name, addres
 
     }
 }
-export const login = (uid, displayName) => {
+export const login = (uid, displayName, email) => {
     return {
         type: types.login,
         payload: {
             uid,
-            displayName
+            displayName,
+            email
         }
     }
 }

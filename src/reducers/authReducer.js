@@ -1,39 +1,31 @@
 // Se importa types
 import { types } from '../types/types'
 
-const inicialState = {
-    profile: {
-        name: '',
-        email: '',
-        image: 'https://bit.ly/dan-abramov',
-        address: ''
-        }
-}
-
 // Se implementa el reducer para autenticar el usuario 
-export const authReducer = (state = inicialState, action) => {
+export const authReducer = (state = {}, action) => {
     switch (action.type) {
         case types.login:
             return {
                 uid: action.payload.uid,
-                name: action.payload.displayName
+                name: action.payload.displayName,
+                email: action.payload.email
             }
         case types.logout:
             return { }
-        case types.addUser:
-            return {
-                ...state, 
-                profile: [action.payload, ...state.profile]
-            }
-        case types.updateUser:
-            return {
-                ...state,
-                profile: state.profile.map(p => p.id === action.payload.id
-                    ? action.payload.p
-                    :
-                    p
-                    )
-            }
+        // case types.addUser:
+        //     return {
+        //         ...state, 
+        //         profile: [action.payload, ...state.profile]
+        //     }
+        // case types.updateUser:
+        //     return {
+        //         ...state,
+        //         profile: state.profile.map(p => p.id === action.payload.id
+        //             ? action.payload.p
+        //             :
+        //             p
+        //             )
+        //     }
         default:
         return state;
     }

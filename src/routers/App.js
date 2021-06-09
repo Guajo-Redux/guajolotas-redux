@@ -22,6 +22,7 @@ import { startLoadingCart } from '../actions/cartAction';
 import Perfil from '../containers/Profile/Perfil.jsx'
 import { startLoadingUser } from '../actions/userAction';
 import Search from '../components/search/Search';
+import Prueba from '../components/admin/Prueba';
 
 const Carga = styled(Spinner)`
      display:block;
@@ -45,12 +46,14 @@ const App = () => {
       dispatch(startLoadingGuajolotas('guajolotas'))
       
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName));
+        dispatch(login(user.uid, user.displayName, user.email));
+
+        console.log(user);
 
         setIsLoggedIn(true);
         
         dispatch(startLoadingCart(user.uid))
-        dispatch(startLoadingUser(user.uid))
+        // dispatch(startLoadingUser(user.uid))
       } else {
         setIsLoggedIn(false);
       }
@@ -81,6 +84,7 @@ const App = () => {
           <PublicRoute path="/auth" component={AuthRouter} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/carrito' component={Carrito} isAuthenticated={isLoggedIn} />
           <PrivateRoute path='/perfil' component={Perfil} isAuthenticated={isLoggedIn} />
+          <PrivateRoute path='/prueba' component={Prueba} isAuthenticated={isLoggedIn} />
           <Route path="/descripcion/:prodId" component={Descripcion} />
           <Route path = "/busqueda" component={Search} ></Route>
           <Redirect to="/home" />
