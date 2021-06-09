@@ -50,76 +50,80 @@ const StyledEditarPerfil = styled.p`
 
 const Perfil = () => {
 
-    const [iconos, setIconos] = useState(false)
+    const auth = useSelector(state => state.auth)
 
-    const cambiarIcono = () => {
-        setIconos(!iconos)
-    }
-    const dispatch = useDispatch()
+    console.log(auth);
 
-    const user = useSelector(state => state.user);
-    // const {auth} = useSelector(state => state.auth);
-    console.log(user[0]);
+    // const [iconos, setIconos] = useState(false)
+
+    // const cambiarIcono = () => {
+    //     setIconos(!iconos)
+    // }
+    // const dispatch = useDispatch()
+
+    // const user = useSelector(state => state.user);
+    // // const {auth} = useSelector(state => state.auth);
+    // console.log(user[0]);
 
     const [aInput, setAInput] = useState(false)
 
-    const nombre = useRef('')
-    const email = useRef('')
-    const direccion = useRef('')
+    // const nombre = useRef('')
+    // const email = useRef('')
+    // const direccion = useRef('')
 
-    const editarUser = async (e) => {
+    // // const editarUser = async (e) => {
 
-        const nuevoNCantidad = nombre.current.value
-        const nuevoECantidad = email.current.value
-        const nuevoDCantidad = direccion.current.value
+    // //     const nuevoNCantidad = nombre.current.value
+    // //     const nuevoECantidad = email.current.value
+    // //     const nuevoDCantidad = direccion.current.value
 
-        if (nuevoNCantidad === '' || nuevoECantidad === '' || nuevoDCantidad === '') {
-            console.log('Llena todos los campos ***********');
-        } else {
-            const upUser = {
-                id: user[0].id,
-                uid: user[0].uid,
-                name: nuevoNCantidad,
-                image: user[0].image,
-                email: nuevoECantidad,
-                address: nuevoDCantidad
-            }
+    // //     if (nuevoNCantidad === '' || nuevoECantidad === '' || nuevoDCantidad === '') {
+    // //         console.log('Llena todos los campos ***********');
+    // //     } else {
+    // //         const upUser = {
+    // //             id: user[0].id,
+    // //             uid: user[0].uid,
+    // //             name: nuevoNCantidad,
+    // //             image: user[0].image,
+    // //             email: nuevoECantidad,
+    // //             address: nuevoDCantidad
+    // //         }
 
-            console.log(upUser);
+    // //         console.log(upUser);
 
-            dispatch(startSaveUser(upUser))
-        }
-    }
+    // //         dispatch(startSaveUser(upUser))
+    // //     }
+    // // }
 
-    const handleAInputClick = (e) => {
-        // document.querySelector('#fileSelector').click();
-        if (e.target.textContent === 'Editar') {
-            setAInput(true)
-        } else {
-            setAInput(false)
-        }
-    }
+    // const handleAInputClick = (e) => {
+    //     // document.querySelector('#fileSelector').click();
+    //     if (e.target.textContent === 'Editar') {
+    //         setAInput(true)
+    //     } else {
+    //         setAInput(false)
+    //     }
+    // }
 
-    const handlePictureClick = () => {
-        document.querySelector('#fileSelector').click();
-    }
+    // const handlePictureClick = () => {
+    //     document.querySelector('#fileSelector').click();
+    // }
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
 
-        console.log(file);
+    //     console.log(file);
 
-        if (file) {
-            dispatch(startUploading(file))
-        }
+    //     if (file) {
+    //         dispatch(startUploading(file))
+    //     }
 
-    }
+    // }
 
-    if (user[0] === undefined) {
-        return (
-            <h1>Wait...</h1>
-        )
-    }
+    // if (user[0] === undefined) {
+    //     return (
+    //         <h1>Wait...</h1>
+    //     )
+    // }
 
     return (
         <div>
@@ -133,7 +137,7 @@ const Perfil = () => {
                     type="file"
                     name="file"
                     style={{ display: 'none' }}
-                    onChange={handleFileChange}
+                    // onChange={handleFileChange}
                 />
                 {/* Lapiz */}
                 {/* <BiPencil style = {{color: 'white'}}/>  */}
@@ -143,15 +147,17 @@ const Perfil = () => {
                     {
                         aInput ?
                             <div>
-                                <Avatar name="Dan Abrahmov" src={user[0].image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
-                                    <AvatarBadge style={{ border: 'none', background: '#FA4A0C', padding: '7px', marginRight: '10px', color: 'white' }} onClick={handlePictureClick}>
+                                <Avatar name="Dan Abrahmov" src={auth.image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
+                                    <AvatarBadge style={{ border: 'none', background: '#FA4A0C', padding: '7px', marginRight: '10px', color: 'white' }} 
+                                    // onClick={handlePictureClick}
+                                    >
                                         <IoCamera />
                                     </AvatarBadge>
                                 </Avatar>
                                 <StyledEditarPerfil>Editar Perfil</StyledEditarPerfil>
                             </div>
                             :
-                            <Avatar name="Dan Abrahmov" src={user[0].image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
+                            <Avatar name="Dan Abrahmov" src={auth.image} style={{ position: 'relative', zIndex: '1', bottom: '60px', width: '100px', height: '100px' }} >
                             </Avatar>
                     }
                 </div>
@@ -160,21 +166,20 @@ const Perfil = () => {
                         ?
                         <div>
                             <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>
-                                {user[0].name}
+                                {auth.name}
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                {user[0].email}
-                            </div>
-                            <div style={{ textAlign: 'center' }}>
-                                {user[0].address}
+                                {auth.email}
                             </div>
                             <StyledButtonEdit>
-                                <StyledButtonEditSelect onClick={handleAInputClick} >Editar</StyledButtonEditSelect>
+                                <StyledButtonEditSelect
+                                //  onClick={handleAInputClick} 
+                                 >Editar</StyledButtonEditSelect>
                             </StyledButtonEdit>
                         </div>
                         :
                         <div>
-                            <StyledStack spacing={4} >
+                            {/* <StyledStack spacing={4} >
                                 <InputGroup>
                                     <InputLeftElement
                                         pointerEvents="none"
@@ -189,11 +194,11 @@ const Perfil = () => {
                                         children={<MdEmail color="gray.300" />}
                                     />
                                     <Input type='email' ref={email} placeholder={user[0].email} />
-                                </InputGroup>
+                                </InputGroup> */}
 
                                 {/* <Button onClick={handlePictureClick}>Picture</Button> */}
 
-                                <InputGroup>
+                                {/* <InputGroup>
                                     <InputLeftElement
                                         pointerEvents="none"
                                         children={<MdEmail color="gray.300" />}
@@ -207,7 +212,7 @@ const Perfil = () => {
                                 <Button onClick={editarUser} variant="solid" style={{ background: '#FA4A0C', color: 'white' }} >
                                     Guardar
                                 </Button>
-                            </StyledContainerButton>
+                            </StyledContainerButton> */}
                         </div>
                 }
             </StyledPerfilContainer>

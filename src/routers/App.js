@@ -46,7 +46,7 @@ const App = () => {
       dispatch(startLoadingGuajolotas('guajolotas'))
       
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName, user.email));
+        dispatch(login(user.uid, user.displayName, user.email, user.photoURL));
 
         console.log(user);
 

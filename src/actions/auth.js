@@ -6,7 +6,7 @@ export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.email))
+                dispatch(login(user.uid, user.displayName, user.email, user.photoURL))
                 dispatch(finishLoading())
                 dispatch(starLoading())
             })
@@ -33,7 +33,7 @@ export const startGoogleLogin = () => {
                 // dispatch(newProfile(user.uid, newUser))
 
                 dispatch(
-                    login(user.uid, user.displayName, user.email),
+                    login(user.uid, user.displayName, user.email, user.photoURL),
                 )
             })
             .catch(e => {
@@ -62,7 +62,7 @@ export const startFacebookLogin = () => {
                 console.log(user);
 
                 dispatch(
-                    login(user.uid, user.displayName, user.email)
+                    login(user.uid, user.displayName, user.email, user.photoURL)
                 )
             })
             .catch(e => {
@@ -90,7 +90,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 
                 await user.updateProfile({ displayName: name })
                 dispatch(
-                    login(user.uid, user.displayName, user.email)
+                    login(user.uid, user.displayName, user.email, user.photoURL)
                 )
             })
             .catch(e => {
@@ -100,13 +100,14 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 
     }
 }
-export const login = (uid, displayName, email) => {
+export const login = (uid, displayName, email, image) => {
     return {
         type: types.login,
         payload: {
             uid,
             displayName,
-            email
+            email,
+            image
         }
     }
 }
