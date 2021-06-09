@@ -6,7 +6,7 @@ export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.email, user.photoURL))
+                dispatch(login(user.uid, user.displayName, user.email, user.photoURL, user.phoneNumber))
                 dispatch(finishLoading())
                 dispatch(starLoading())
             })
@@ -33,7 +33,7 @@ export const startGoogleLogin = () => {
                 // dispatch(newProfile(user.uid, newUser))
 
                 dispatch(
-                    login(user.uid, user.displayName, user.email, user.photoURL),
+                    login(user.uid, user.displayName, user.email, user.photoURL, user.phoneNumber),
                 )
             })
             .catch(e => {
@@ -62,7 +62,7 @@ export const startFacebookLogin = () => {
                 console.log(user);
 
                 dispatch(
-                    login(user.uid, user.displayName, user.email, user.photoURL)
+                    login(user.uid, user.displayName, user.email, user.photoURL, user.phoneNumber)
                 )
             })
             .catch(e => {
@@ -90,7 +90,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 
                 await user.updateProfile({ displayName: name })
                 dispatch(
-                    login(user.uid, user.displayName, user.email, user.photoURL)
+                    login(user.uid, user.displayName, user.email, user.photoURL, user.phoneNumber)
                 )
             })
             .catch(e => {
@@ -100,14 +100,15 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 
     }
 }
-export const login = (uid, displayName, email, image) => {
+export const login = (uid, displayName, email, image, phone) => {
     return {
         type: types.login,
         payload: {
             uid,
             displayName,
             email,
-            image
+            image,
+            phone
         }
     }
 }
